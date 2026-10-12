@@ -72,3 +72,7 @@
 /shipping-surcharge-index.html /shipping-surcharge-index 301
 /types-of-carrier-surcharges.html /types-of-carrier-surcharges 301
 /what-is-dimensional-weight.html /what-is-dimensional-weight 301
+
+# Thank-you page (form confirmation)
+/thank-you.html /thank-you 301
+/thank-you/ /thank-you 301
