@@ -1714,16 +1714,7 @@
             gtag('event', 'calculator_completed', {event_category: 'conversion', event_label: 'results_shown'});
         };
     }
-    // GA4: phone clicks
-    document.addEventListener('click', function(e) {
-        var t = e.target.closest('a[href^="tel:"]');
-        if (t) gtag('event', 'phone_click', {event_category: 'contact', event_label: 'phone_link'});
-    });
-    // GA4: Calendly
-    window.addEventListener('message', function(e) {
-        if (e.data && e.data.event === 'calendly.event_scheduled')
-            gtag('event', 'calendly_booked', {event_category: 'conversion', event_label: 'call_scheduled'});
-    });
+    // Phone clicks and Calendly bookings are tracked once, sitewide, by /attribution.js
     </script>
     <script src="/attribution.js" defer></script>
 </body>
