@@ -5,3 +5,6 @@
 /seo-status
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store
+
+/thank-you
+  X-Robots-Tag: noindex, nofollow
