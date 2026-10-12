@@ -61,6 +61,18 @@
     });
   });
 
+  // ── Email clicks (mailto: links) ──────────────────────────────────────────
+  // Sends where the link sits on the page, never the address itself:
+  // Google Analytics policy forbids sending email addresses in event data.
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('a[href^="mailto:"]');
+    if (!t) return;
+    fire('email_click', {
+      event_category: 'contact',
+      cta_location: t.dataset.ctaLocation || getLocation(t)
+    });
+  });
+
   // ── Calendly popup button clicks ──────────────────────────────────────────
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[onclick*="Calendly"]');
