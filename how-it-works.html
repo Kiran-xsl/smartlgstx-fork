@@ -117,7 +117,15 @@
   "email": "chris@smartlgstx.com",
   "description": "Smart LGSTX helps businesses reduce UPS and FedEx shipping costs through expert carrier contract negotiation.",
   "areaServed": "US",
-  "serviceType": "Carrier Contract Negotiation",
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Carrier Contract Negotiation",
+      "serviceType": "Carrier Contract Negotiation",
+      "areaServed": "US"
+    }
+  },
   "sameAs": [
     "https://www.linkedin.com/company/smartlgstx/",
     "https://www.facebook.com/profile.php?id=61595323167337",
@@ -130,8 +138,11 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "How It Works | Smart LGSTX",
-  "url": "https://www.smartlgstx.com/how-it-works/",
+  "url": "https://www.smartlgstx.com/how-it-works",
   "isPartOf": {
+    "@id": "https://www.smartlgstx.com/#website"
+  },
+  "publisher": {
     "@id": "https://www.smartlgstx.com/#organization"
   }
 }
@@ -354,7 +365,7 @@
                 </div>
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-lg font-bold text-navy mb-2">Does Smart LGSTX handle international shipping contracts?</h3>
-                    <p class="text-gray-600">Yes — international is included in the audit at no additional cost. Carrier contracts have separate international rate structures, customs-related fees, and fuel surcharge tables negotiated independently from domestic terms. Our founder's background includes international account pricing on the carrier side. If you have international volume, we audit it alongside your domestic data and identify savings on both.</p>
+                    <p class="text-gray-600">Yes — international is included in the audit at no additional cost. Carrier contracts have separate international rate structures, customs-related fees, and fuel surcharge tables negotiated independently from domestic terms. Our founder's carrier-side background includes international accounts. If you have international volume, we audit it alongside your domestic data and identify savings on both.</p>
                 </div>
             </div>
         </div>

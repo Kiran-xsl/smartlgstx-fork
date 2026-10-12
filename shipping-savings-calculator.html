@@ -870,7 +870,15 @@
   "email": "chris@smartlgstx.com",
   "description": "Smart LGSTX helps businesses reduce UPS and FedEx shipping costs through expert carrier contract negotiation.",
   "areaServed": "US",
-  "serviceType": "Carrier Contract Negotiation",
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Carrier Contract Negotiation",
+      "serviceType": "Carrier Contract Negotiation",
+      "areaServed": "US"
+    }
+  },
   "sameAs": [
     "https://www.linkedin.com/company/smartlgstx/",
     "https://www.facebook.com/profile.php?id=61595323167337",
@@ -883,8 +891,11 @@
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Shipping Savings Calculator | Smart LGSTX",
-  "url": "https://www.smartlgstx.com/shipping-savings-calculator/",
+  "url": "https://www.smartlgstx.com/shipping-savings-calculator",
   "isPartOf": {
+    "@id": "https://www.smartlgstx.com/#website"
+  },
+  "publisher": {
     "@id": "https://www.smartlgstx.com/#organization"
   }
 }
@@ -1706,16 +1717,7 @@
             gtag('event', 'calculator_completed', {event_category: 'conversion', event_label: 'results_shown'});
         };
     }
-    // GA4: phone clicks
-    document.addEventListener('click', function(e) {
-        var t = e.target.closest('a[href^="tel:"]');
-        if (t) gtag('event', 'phone_click', {event_category: 'contact', event_label: 'phone_link'});
-    });
-    // GA4: Calendly
-    window.addEventListener('message', function(e) {
-        if (e.data && e.data.event === 'calendly.event_scheduled')
-            gtag('event', 'calendly_booked', {event_category: 'conversion', event_label: 'call_scheduled'});
-    });
+    // Phone clicks and Calendly bookings are tracked once, sitewide, by /attribution.js
     </script>
     <script src="/attribution.js" defer></script>
 </body>
