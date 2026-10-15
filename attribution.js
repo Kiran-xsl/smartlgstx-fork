@@ -85,7 +85,7 @@
 
   // ── Audit form CTA clicks ─────────────────────────────────────────────────
   document.addEventListener('click', function (e) {
-    var t = e.target.closest('a[href*="get-your-free-audit"]');
+    var t = e.target.closest('a[href*="get-your-free-audit"], a[href="/contact"]');
     if (!t) return;
     fire('cta_click', {
       cta_mode: 'form',

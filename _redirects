@@ -9,7 +9,8 @@
 /index.html / 301
 /about.html /about 301
 /how-it-works.html /how-it-works 301
-/get-your-free-audit.html /get-your-free-audit 301
+/get-your-free-audit.html /contact 301
+/contact.html /contact 301
 /shipping-savings-calculator.html /shipping-savings-calculator 301
 /international-shipping.html /international-shipping 301
 /dtc-ecommerce-shipping-savings.html /dtc-ecommerce-shipping-savings 301
@@ -45,7 +46,9 @@
 /fitness-shipping-savings/ /fitness-shipping-savings 301
 /food-beverage-shipping-savings/ /food-beverage-shipping-savings 301
 /furniture-shipping-savings/ /furniture-shipping-savings 301
-/get-your-free-audit/ /get-your-free-audit 301
+/get-your-free-audit/ /contact 301
+/contact/ /contact 301
+/get-your-free-audit /contact 301
 /how-carrier-contract-negotiation-works/ /how-carrier-contract-negotiation-works 301
 /how-it-works/ /how-it-works 301
 /how-to-read-ups-invoice/ /how-to-read-ups-invoice 301
