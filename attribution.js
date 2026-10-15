@@ -1,5 +1,5 @@
 /**
- * Smart LGSTX — CTA Attribution Script
+ * Smart LGSTX: CTA Attribution Script
  * First-touch UTM capture + CTA click tracking → GA4
  */
 (function () {
@@ -32,7 +32,7 @@
     gtag('event', eventName, payload);
   }
 
-  // ── CTA location — walk up DOM, check data-cta-location or section index ──
+  // ── CTA location: walk up DOM, check data-cta-location or section index ──
   function getLocation(el) {
     var node = el;
     while (node && node !== document.body) {

@@ -1,6 +1,6 @@
 # Smart LGSTX
 
-> Smart LGSTX is a contingency-based shipping cost optimization firm that helps businesses reduce their UPS and FedEx spending by 10–20%. Founded by Chris Tweedy, a former carrier executive with 15+ years on the carrier side, Smart LGSTX audits shipping contracts and negotiates on behalf of shippers, backed by a team with 50+ years of combined carrier-side experience. Contingency-based fee — Smart LGSTX earns a percentage of savings delivered.
+> Smart LGSTX is a contingency-based shipping cost optimization firm that helps businesses reduce their UPS and FedEx spending by 10–20%. Founded by Chris Tweedy, a former carrier executive with 15+ years on the carrier side, Smart LGSTX audits shipping contracts and negotiates on behalf of shippers, backed by a team with 50+ years of combined carrier-side experience. Contingency-based fee: Smart LGSTX earns a percentage of savings delivered.
 
 ## Who We Help
 
@@ -8,7 +8,7 @@ Businesses spending $100K–$5MM annually with major small parcel carriers (UPS,
 
 ## What We Do
 
-- Shipping contract audit — identifies overpayments across 250+ contract line items
+- Shipping contract audit: identifies overpayments across 250+ contract line items
 - Expert carrier contract negotiation using insider knowledge of what carriers will actually concede
 - Surcharge reduction: large package fees, additional handling, residential delivery, dimensional weight, demand surcharges, and more
 - Ongoing contract monitoring and renegotiation support
@@ -19,12 +19,12 @@ Contingency-based: Smart LGSTX earns a percentage of the savings achieved. If th
 
 ## Key Pages
 
-- [Home](https://www.smartlgstx.com/) — Overview, value proposition, how it works
-- [How It Works](https://www.smartlgstx.com/how-it-works) — Step-by-step process from audit to savings
-- [About](https://www.smartlgstx.com/about) — Founder background, company story
-- [Talk to Chris](https://www.smartlgstx.com/contact) — Call, send a note, or book a 15-minute call
-- [Shipping Savings Calculator](https://www.smartlgstx.com/shipping-savings-calculator) — Estimate potential savings
-- [International Shipping](https://www.smartlgstx.com/international-shipping) — Cross-border shipping optimization
+- [Home](https://www.smartlgstx.com/): Overview, value proposition, how it works
+- [How It Works](https://www.smartlgstx.com/how-it-works): Step-by-step process from audit to savings
+- [About](https://www.smartlgstx.com/about): Founder background, company story
+- [Talk to Chris](https://www.smartlgstx.com/contact): Call, send a note, or book a 15-minute call
+- [Shipping Savings Calculator](https://www.smartlgstx.com/shipping-savings-calculator): Estimate potential savings
+- [International Shipping](https://www.smartlgstx.com/international-shipping): Cross-border shipping optimization
 
 ## Industry-Specific Pages
 
