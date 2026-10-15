@@ -385,6 +385,36 @@
 .sl-social a.sl-social__link:hover,.sl-social a.sl-social__link:focus-visible{outline-color:#FADC61}
 @media (prefers-reduced-motion:reduce){.sl-social a.sl-social__link{transition:none}}
 </style>
+    <style id="slx-testimonials-css">
+        /* Client testimonials (Oct 2026). Self-contained so it renders the same on Tailwind and custom-CSS pages. */
+        .slx-t-section{background:#f8fafc;padding:0 24px 100px}
+        .slx-t-wrap{max-width:1200px;margin:0 auto}
+        .slx-t-head{text-align:center;max-width:700px;margin:0 auto 48px}
+        .slx-t-head--inline{margin:64px auto 32px}
+        .slx-t-label{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#64748B;margin-bottom:12px}
+        .slx-t-title{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;color:#001850;line-height:1.2;letter-spacing:-.5px;margin:0 0 12px}
+        .slx-t-title--sm{font-size:clamp(1.5rem,3vw,2rem);margin:0}
+        .slx-t-sub{font-size:1.0625rem;line-height:1.6;color:#475569;margin:0}
+        .slx-t-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;text-align:left}
+        .slx-t-card{display:flex;flex-direction:column;margin:0;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:32px 28px 28px;box-shadow:0 1px 3px rgba(0,24,80,.06)}
+        .slx-t-mark{display:block;width:32px;height:24px;margin:0 0 16px;color:#E5C94D}
+        .slx-t-card blockquote,.slx-t-single blockquote{margin:0;padding:0;border:0;quotes:none}
+        .slx-t-card blockquote{flex:1 1 auto}
+        .slx-t-card blockquote p{margin:0;font-size:1.0625rem;line-height:1.7;color:#1e293b;font-style:normal}
+        .slx-t-person{display:block;margin:24px 0 0;padding-top:20px;border-top:1px solid #f1f5f9}
+        .slx-t-name{display:block;font-weight:700;font-size:1rem;line-height:1.3;color:#001850}
+        .slx-t-role{display:block;margin-top:2px;font-size:.875rem;line-height:1.4;color:#5b6b80}
+        .slx-t-band{background:#fff;padding:72px 24px}
+        .slx-t-band--tint{background:#f8fafc}
+        .slx-t-single{max-width:820px;margin:0 auto;text-align:center}
+        .slx-t-single .slx-t-mark{width:40px;height:30px;margin:0 auto 20px}
+        .slx-t-single blockquote p{margin:0;font-size:clamp(1.125rem,2.2vw,1.375rem);line-height:1.6;font-weight:500;color:#001850;font-style:normal}
+        .slx-t-single .slx-t-person{margin-top:24px;padding-top:0;border-top:0;text-align:center}
+        .slx-t-single .slx-t-person::before{content:"";display:block;width:32px;height:3px;margin:0 auto 14px;border-radius:2px;background:#E5C94D}
+        .slx-t-single--card{margin-top:40px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:36px 32px;box-shadow:0 1px 3px rgba(0,24,80,.06)}
+        @media (max-width:900px){.slx-t-grid{grid-template-columns:1fr;max-width:640px;margin:0 auto}}
+        @media (max-width:640px){.slx-t-section{padding-bottom:72px}.slx-t-band{padding:56px 20px}.slx-t-card{padding:28px 22px 22px}.slx-t-single--card{padding:28px 22px}}
+    </style>
 </head>
 <body>
 
@@ -611,6 +641,18 @@
     </div>
   </div>
 </section>
+
+    <!-- Client Testimonial -->
+    <div class="slx-t-band" role="region" aria-label="Client testimonial">
+        <figure class="slx-t-single">
+            <svg class="slx-t-mark" viewBox="0 0 32 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 24V14.4C0 6.4 4.3 1.6 12.2 0l1.4 3.2C9 4.6 6.9 7.4 6.6 11.2H12V24H0zm18 0V14.4C18 6.4 22.3 1.6 30.2 0l1.4 3.2C27 4.6 24.9 7.4 24.6 11.2H30V24H18z"/></svg>
+            <blockquote><p>Our olive oil gift sets are heavy, and shipping was eating into our margins. What I appreciate most was getting a clear explanation of where the money was going. No confusing pitch, just someone willing to answer our questions and help us bring those costs down.</p></blockquote>
+            <figcaption class="slx-t-person">
+                <span class="slx-t-name">Elena Ramirez</span>
+                <span class="slx-t-role">Olive Oil and Specialty Foods</span>
+            </figcaption>
+        </figure>
+    </div>
 
 <section class="cta-section">
   <h2>Get Your Free Shipping Audit</h2>
