@@ -415,6 +415,19 @@
         @media (max-width:900px){.slx-t-grid{grid-template-columns:1fr;max-width:640px;margin:0 auto}}
         @media (max-width:640px){.slx-t-section{padding-bottom:72px}.slx-t-band{padding:56px 20px}.slx-t-card{padding:28px 22px 22px}.slx-t-single--card{padding:28px 22px}}
     </style>
+    <style id="slx-goldband-fix">
+        /* This page does not load Tailwind, so the shared "Talk to a Former Carrier Executive" band rendered unstyled. Mirrors the Tailwind look used on the other pages. */
+        section.py-16.bg-gold{background:#FADC61;padding:64px 0;text-align:center}
+        section.py-16.bg-gold > div{max-width:56rem;margin:0 auto;padding:0 24px}
+        section.py-16.bg-gold h2{font-size:1.5rem;line-height:1.3;font-weight:700;color:#001850;margin:0 0 16px}
+        section.py-16.bg-gold p{font-size:1.125rem;line-height:1.75;color:rgba(0,24,80,.8);margin:0 0 32px}
+        section.py-16.bg-gold a{display:inline-block;font-weight:700;font-size:1.125rem;line-height:1.5;padding:16px 32px;border-radius:8px;text-decoration:none;margin:0 8px 16px;transition:background .2s}
+        section.py-16.bg-gold a.bg-navy{background:#001850;color:#fff}
+        section.py-16.bg-gold a.bg-navy:hover{background:#002470}
+        section.py-16.bg-gold a.border-navy{border:2px solid #001850;color:#001850;background:transparent}
+        section.py-16.bg-gold a.border-navy:hover{background:rgba(0,24,80,.1)}
+        @media (min-width:768px){section.py-16.bg-gold h2{font-size:1.875rem}}
+    </style>
 </head>
 <body>
 
