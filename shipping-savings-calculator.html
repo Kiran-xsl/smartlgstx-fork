@@ -22,8 +22,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Smart LGSTX" />
     <meta property="og:url" content="https://www.smartlgstx.com/shipping-savings-calculator" />
-    <meta property="og:title" content="Shipping Savings Calculator — How Much Are You Overpaying? | Smart LGSTX" />
-    <meta property="og:description" content="4 questions. Specific dollar estimate. Find out how much you could recover from your UPS or FedEx contract — no data required, no commitment." />
+    <meta property="og:title" content="Shipping Savings Calculator: How Much Are You Overpaying? | Smart LGSTX" />
+    <meta property="og:description" content="4 questions. Specific dollar estimate. Find out how much you could recover from your UPS or FedEx contract. No data required, no commitment." />
     <meta property="og:image" content="https://www.smartlgstx.com/images/SmartLogistics%20Homepage%20Hero%20Section.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -31,8 +31,8 @@
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Shipping Savings Calculator — How Much Are You Overpaying? | Smart LGSTX" />
-    <meta name="twitter:description" content="4 questions. Specific dollar estimate. Find out how much you could recover from your UPS or FedEx contract — no data required, no commitment." />
+    <meta name="twitter:title" content="Shipping Savings Calculator: How Much Are You Overpaying? | Smart LGSTX" />
+    <meta name="twitter:description" content="4 questions. Specific dollar estimate. Find out how much you could recover from your UPS or FedEx contract. No data required, no commitment." />
     <meta name="twitter:image" content="https://www.smartlgstx.com/images/SmartLogistics%20Homepage%20Hero%20Section.jpg" />
     <meta name="twitter:image:alt" content="Smart LGSTX shipping savings calculator showing estimated annual carrier savings for UPS and FedEx shippers" />
 
@@ -1028,7 +1028,7 @@
                         <!-- Quick estimate preview (shows after spend selection) -->
                         <div class="quick-estimate" id="quickEstimate">
                             <div class="quick-estimate-label">Quick Estimate</div>
-                            <div class="quick-estimate-range" id="quickRange">—</div>
+                            <div class="quick-estimate-range" id="quickRange">…</div>
                             <div class="quick-estimate-note">Refine your estimate with 2 more questions below</div>
                         </div>
                         <label class="form-label">Primary Carrier <span class="required-star">*</span> <span style="font-size: 0.875rem; color: #64748b;">(Select all that apply)</span></label>
@@ -1545,10 +1545,10 @@
             const resultSubtitle = document.querySelector('.results-subtitle');
             if (annualSpend >= 2000000) {
                 // $2M+ = direct negotiation path
-                resultSubtitle.textContent = 'Based on your inputs, we estimate you could save this much annually through direct carrier negotiation. No savings, no fee — our fee applies only when savings are delivered.';
+                resultSubtitle.textContent = 'Based on your inputs, we estimate you could save this much annually through direct carrier negotiation. No savings, no fee: our fee applies only when savings are delivered.';
             } else {
                 // < $2M = quick path to savings
-                resultSubtitle.textContent = 'Based on your inputs, we can likely implement these savings within the first week using our optimized rate structures. No upfront cost — you only pay for what you save.';
+                resultSubtitle.textContent = 'Based on your inputs, we can likely implement these savings within the first week using our optimized rate structures. No upfront cost. You only pay for what you save.';
             }
 
             // Populate hidden form fields for Formspree submission
