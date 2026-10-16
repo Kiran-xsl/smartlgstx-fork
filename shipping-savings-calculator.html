@@ -1616,6 +1616,20 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
                     })
                     .then(response => {
                         if (response.ok) {
+                            // Confirmed calculator lead (Formspree returned 2xx). GA4 and the
+                            // Meta Pixel get the industry only, never what was typed.
+                            var leadCat = formData.get('product_category') || '(not set)';
+                            if (typeof gtag === 'function') gtag('event', 'generate_lead', {
+                                form_id: 'calculator-final-step',
+                                lead_source: 'calculator',
+                                product_category: leadCat,
+                                page: '/shipping-savings-calculator'
+                            });
+                            if (typeof fbq === 'function') fbq('track', 'Lead', {
+                                form_id: 'calculator-final-step',
+                                lead_source: 'calculator',
+                                product_category: leadCat
+                            });
                             // Success - show inline success message
                             emailForm.innerHTML = `
                                 <div style="text-align: center; padding: 3rem 2rem;">
