@@ -123,6 +123,23 @@
 .ty-card--pick{border-color:#FADC61;background:#fffdf2}
 @media (prefers-reduced-motion:reduce){.ty-check__ring,.ty-check__tick{animation:none;stroke-dashoffset:0}.ty-receipt{animation:none}.ty-action,.ty-card{transition:none}.ty-action:hover{transform:none}}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1598560534657972');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body class="bg-white text-dark">
     <!-- Navigation -->
@@ -402,6 +419,14 @@
                         product_category: lead.category || '(not set)',
                         page: '/thank-you'
                     });
+                    // The same confirmed lead for the Meta Pixel, nothing personal. The contact
+                    // form has no industry field, so the category is sent only when there is one.
+                    // Inside try, so a Meta error can't stop the lead being marked as counted.
+                    try {
+                        var metaLead = { form_id: lead.form || 'auditForm', lead_source: 'audit_form' };
+                        if (lead.category) metaLead.product_category = lead.category;
+                        if (typeof fbq === 'function') fbq('track', 'Lead', metaLead);
+                    } catch (e) {}
                     lead.counted = true;
                     try { sessionStorage.setItem(KEY, JSON.stringify(lead)); } catch (e) {}
                 }

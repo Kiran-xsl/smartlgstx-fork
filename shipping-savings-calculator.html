@@ -916,6 +916,23 @@
 .sl-social a.sl-social__link:hover,.sl-social a.sl-social__link:focus-visible{outline-color:#FADC61}
 @media (prefers-reduced-motion:reduce){.sl-social a.sl-social__link{transition:none}}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1598560534657972');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
     <!-- Navigation -->
@@ -1226,7 +1243,7 @@
                         <h3>Want the full breakdown?</h3>
                         <p>Enter your email to unlock your detailed savings report.</p>
                         
-                        <form class="email-form" action="https://formspree.io/f/xjgaqarq" method="POST" style="margin-top: 1.5rem;">
+                        <form class="email-form" id="calculator-final-step" action="https://formspree.io/f/xjgaqarq" method="POST" style="margin-top: 1.5rem;">
                             <!-- Hidden fields to capture calculator results -->
                             <input type="hidden" name="estimated_savings" id="formSavings">
                             <input type="hidden" name="annual_spend" id="formAnnualSpend">
@@ -1608,6 +1625,24 @@
                                     <p style="color: #64748b; font-size: 0.875rem;">Check your inbox in the next few minutes. If you don't see it, check your spam folder.</p>
                                 </div>
                             `;
+                            // Confirmed calculator lead (Formspree returned 2xx). GA4 and the
+                            // Meta Pixel get the industry only, never what was typed. Sent after
+                            // the success message, and inside try, so tracking can never turn a
+                            // sent report into the "problem sending" alert below.
+                            try {
+                                var leadCat = formData.get('product_category') || '(not set)';
+                                if (typeof gtag === 'function') gtag('event', 'generate_lead', {
+                                    form_id: 'calculator-final-step',
+                                    lead_source: 'calculator',
+                                    product_category: leadCat,
+                                    page: '/shipping-savings-calculator'
+                                });
+                                if (typeof fbq === 'function') fbq('track', 'Lead', {
+                                    form_id: 'calculator-final-step',
+                                    lead_source: 'calculator',
+                                    product_category: leadCat
+                                });
+                            } catch (trackErr) {}
                         } else {
                             throw new Error('Form submission failed');
                         }
@@ -1706,7 +1741,11 @@
     // GA4: calculator step completions
     document.querySelectorAll('[onclick^="nextStep"]').forEach(function(btn, i) {
         btn.addEventListener('click', function() {
+            // nextStep() has already run from the button's inline onclick and shows
+            // .field-error messages when an answer is missing. Count only steps that passed.
+            if (document.querySelector('.field-error')) return;
             gtag('event', 'calculator_step_' + (i+1) + '_complete', {event_category: 'engagement'});
+            try { if (typeof fbq === 'function') fbq('trackCustom', 'CalculatorStep', {step: i + 1}); } catch (e) {}
         });
     });
     // GA4: calculator results shown
@@ -1714,7 +1753,14 @@
     if (typeof origCalc === 'function') {
         window.calculateResults = function() {
             origCalc.apply(this, arguments);
+            // calculateResults stops early and shows .field-error messages when a step 3
+            // answer is missing. Count a completion only when the results actually showed.
+            if (document.querySelector('.field-error')) return;
             gtag('event', 'calculator_completed', {event_category: 'conversion', event_label: 'results_shown'});
+            // Meta gets the industry only. Spend and savings figures stay out of Meta:
+            // its Business Tools Terms bar sending financial information.
+            var calcCat = document.getElementById('productCategory');
+            try { if (typeof fbq === 'function') fbq('trackCustom', 'CalculatorCompleted', {product_category: (calcCat && calcCat.value) || 'other'}); } catch (e) {}
         };
     }
     // Phone clicks and Calendly bookings are tracked once, sitewide, by /attribution.js

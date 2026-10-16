@@ -1,6 +1,6 @@
 /**
  * Smart LGSTX: CTA Attribution Script
- * First-touch UTM capture + CTA click tracking → GA4
+ * First-touch UTM capture + CTA click tracking → GA4 and the Meta Pixel
  */
 (function () {
   'use strict';
@@ -22,7 +22,35 @@
     catch (e) { return {}; }
   }
 
+  // ── Meta Pixel mirror ─────────────────────────────────────────────────────
+  // Every event fired below also goes to the Meta Pixel, so Ads Manager can
+  // tie ads to contacts and bookings. Meta's standard events where one fits
+  // (Contact, Schedule), custom events for the rest. Only the action and where
+  // it happened go to Meta: never names, emails, phone numbers or form text.
+  var META_EVENTS = {
+    phone_click:            ['track', 'Contact'],
+    email_click:            ['track', 'Contact'],
+    calendly_booked:        ['track', 'Schedule'],
+    cta_click:              ['trackCustom', 'CTAClick'],
+    social_click:           ['trackCustom', 'SocialClick'],
+    calendly_opened:        ['trackCustom', 'CalendlyOpened'],
+    calendly_time_selected: ['trackCustom', 'CalendlyTimeSelected']
+  };
+  var META_PARAMS = ['cta_location', 'cta_mode', 'social_network'];
+
+  function fireMeta(eventName, extra) {
+    var m = META_EVENTS[eventName];
+    if (!m || typeof fbq !== 'function') return;
+    var params = {};
+    META_PARAMS.forEach(function (k) { if (extra && extra[k]) params[k] = extra[k]; });
+    if (eventName === 'phone_click') params.contact_method = 'phone';
+    if (eventName === 'email_click') params.contact_method = 'email';
+    fbq(m[0], m[1], params);
+  }
+
   function fire(eventName, extra) {
+    // A Meta failure must never cost the GA4 event
+    try { fireMeta(eventName, extra); } catch (e) {}
     if (typeof gtag !== 'function') return;
     var payload = Object.assign(
       { page: window.location.pathname },
@@ -109,10 +137,20 @@
   });
 
   // ── Calendly booking funnel events ────────────────────────────────────────
+  // Calendly posts these from https://calendly.com (the check in Calendly's own
+  // embed docs), and posts event_type_viewed twice, milliseconds apart, for one
+  // popup open (seen on the live site Oct 16, 2026). Ignoring other origins stops
+  // another page faking a booking; ignoring repeats within 2 seconds stops one
+  // open or booking counting twice.
+  var calendlyLast = {};
   window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://calendly.com') return;
     if (!e.data || !e.data.event) return;
     if (e.data.event.indexOf('calendly') !== 0) return;
     var ev = e.data.event;
+    var now = Date.now();
+    if (calendlyLast[ev] && now - calendlyLast[ev] < 2000) return;
+    calendlyLast[ev] = now;
     var ft = getFirstTouch();
     if (ev === 'calendly.event_type_viewed')
       fire('calendly_opened', { event_category: 'engagement' });
@@ -128,6 +166,19 @@
         first_touch_campaign: ft.campaign,
         first_touch_landing:  ft.landing
       });
+  });
+
+  // ── Form starts (Meta only) ───────────────────────────────────────────────
+  // GA4 already records form_start through Enhanced Measurement. Meta gets one
+  // FormStart per form per page view, so starts can be compared with leads.
+  var startedForms = {};
+  document.addEventListener('focusin', function (e) {
+    var f = e.target && e.target.closest && e.target.closest('form[action*="formspree.io"]');
+    if (!f || typeof fbq !== 'function') return;
+    var id = f.id || 'unnamed_form';
+    if (startedForms[id]) return;
+    startedForms[id] = true;
+    fbq('trackCustom', 'FormStart', { form_id: id });
   });
 
 })();
