@@ -213,5 +213,11 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addGpcNote);
     else addGpcNote();
   }
+  // The Back button can restore a page with its old scripts still running. If the
+  // visitor turned sharing off in the meantime, reload so the pixel check runs again.
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted && typeof fbq === 'function' &&
+        /(?:^|;\s*)sl_privacy=no_share(?:;|$)/.test(document.cookie)) location.reload();
+  });
 
 })();

@@ -355,6 +355,10 @@
                 if (typeof gtag === 'function') gtag('event', out ? 'privacy_opt_out' : 'privacy_opt_in', { page: '/privacy-choices' });
             });
 
+            // Coming back with the Back button: show the current choice, which may have
+            // changed in another tab
+            window.addEventListener('pageshow', function (e) { if (e.persisted) render(false); });
+
             render(false);
         })();
     </script>
