@@ -181,4 +181,37 @@
     fbq('trackCustom', 'FormStart', { form_id: id });
   });
 
+  // ── Your Privacy Choices ──────────────────────────────────────────────────
+  // Each page's head skips the Meta Pixel when the visitor turned sharing off at
+  // /privacy-choices or the browser sends Global Privacy Control (GPC). GA4 gets
+  // one meta_pixel_off per session, so reports can show how much traffic Meta
+  // can't see. With GPC on, the footer also says the signal was honored, as
+  // California's rules ask (11 CCR 7025).
+  var gpcOn = navigator.globalPrivacyControl === true;
+  var noShare = gpcOn || /(?:^|;\s*)sl_privacy=no_share(?:;|$)/.test(document.cookie);
+  if (noShare) {
+    try {
+      if (!sessionStorage.getItem('sl_mpo')) {
+        sessionStorage.setItem('sl_mpo', '1');
+        fire('meta_pixel_off', { reason: gpcOn ? 'gpc' : 'choice' });
+      }
+    } catch (e) {}
+  }
+  if (gpcOn) {
+    var addGpcNote = function () {
+      Array.prototype.forEach.call(document.querySelectorAll('footer a[href="/privacy-choices"]'), function (a) {
+        if (a.parentNode.querySelector('.sl-gpc-note')) return;
+        // The separator stays outside the no-wrap span so phones can break the line there
+        var note = document.createElement('span');
+        note.className = 'sl-gpc-note';
+        note.style.whiteSpace = 'nowrap';
+        note.textContent = 'Opt-Out Preference Signal Honored';
+        a.parentNode.insertBefore(note, a.nextSibling);
+        a.parentNode.insertBefore(document.createTextNode('  ·  '), note);
+      });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addGpcNote);
+    else addGpcNote();
+  }
+
 })();
