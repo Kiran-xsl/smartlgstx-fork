@@ -1746,6 +1746,9 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
     if (typeof origCalc === 'function') {
         window.calculateResults = function() {
             origCalc.apply(this, arguments);
+            // calculateResults stops early and shows .field-error messages when a step 3
+            // answer is missing. Count a completion only when the results actually showed.
+            if (document.querySelector('.field-error')) return;
             gtag('event', 'calculator_completed', {event_category: 'conversion', event_label: 'results_shown'});
             // Meta gets the industry only. Spend and savings figures stay out of Meta:
             // its Business Tools Terms bar sending financial information.
