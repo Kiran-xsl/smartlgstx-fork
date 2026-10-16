@@ -419,6 +419,12 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
                         product_category: lead.category || '(not set)',
                         page: '/thank-you'
                     });
+                    // The same confirmed lead for the Meta Pixel. Category only, nothing personal.
+                    if (typeof fbq === 'function') fbq('track', 'Lead', {
+                        form_id: lead.form || 'auditForm',
+                        lead_source: 'audit_form',
+                        product_category: lead.category || '(not set)'
+                    });
                     lead.counted = true;
                     try { sessionStorage.setItem(KEY, JSON.stringify(lead)); } catch (e) {}
                 }

@@ -1243,7 +1243,7 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
                         <h3>Want the full breakdown?</h3>
                         <p>Enter your email to unlock your detailed savings report.</p>
                         
-                        <form class="email-form" action="https://formspree.io/f/xjgaqarq" method="POST" style="margin-top: 1.5rem;">
+                        <form class="email-form" id="calculator-final-step" action="https://formspree.io/f/xjgaqarq" method="POST" style="margin-top: 1.5rem;">
                             <!-- Hidden fields to capture calculator results -->
                             <input type="hidden" name="estimated_savings" id="formSavings">
                             <input type="hidden" name="annual_spend" id="formAnnualSpend">
@@ -1724,6 +1724,7 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
     document.querySelectorAll('[onclick^="nextStep"]').forEach(function(btn, i) {
         btn.addEventListener('click', function() {
             gtag('event', 'calculator_step_' + (i+1) + '_complete', {event_category: 'engagement'});
+            if (typeof fbq === 'function') fbq('trackCustom', 'CalculatorStep', {step: i + 1});
         });
     });
     // GA4: calculator results shown
@@ -1732,6 +1733,10 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
         window.calculateResults = function() {
             origCalc.apply(this, arguments);
             gtag('event', 'calculator_completed', {event_category: 'conversion', event_label: 'results_shown'});
+            // Meta gets the industry only. Spend and savings figures stay out of Meta:
+            // its Business Tools Terms bar sending financial information.
+            var calcCat = document.getElementById('productCategory');
+            if (typeof fbq === 'function') fbq('trackCustom', 'CalculatorCompleted', {product_category: (calcCat && calcCat.value) || 'other'});
         };
     }
     // Phone clicks and Calendly bookings are tracked once, sitewide, by /attribution.js
