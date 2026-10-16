@@ -137,10 +137,20 @@
   });
 
   // ── Calendly booking funnel events ────────────────────────────────────────
+  // Calendly posts these from https://calendly.com (the check in Calendly's own
+  // embed docs), and posts event_type_viewed twice, milliseconds apart, for one
+  // popup open (seen on the live site Oct 16, 2026). Ignoring other origins stops
+  // another page faking a booking; ignoring repeats within 2 seconds stops one
+  // open or booking counting twice.
+  var calendlyLast = {};
   window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://calendly.com') return;
     if (!e.data || !e.data.event) return;
     if (e.data.event.indexOf('calendly') !== 0) return;
     var ev = e.data.event;
+    var now = Date.now();
+    if (calendlyLast[ev] && now - calendlyLast[ev] < 2000) return;
+    calendlyLast[ev] = now;
     var ft = getFirstTouch();
     if (ev === 'calendly.event_type_viewed')
       fire('calendly_opened', { event_category: 'engagement' });
