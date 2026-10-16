@@ -1741,6 +1741,9 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
     // GA4: calculator step completions
     document.querySelectorAll('[onclick^="nextStep"]').forEach(function(btn, i) {
         btn.addEventListener('click', function() {
+            // nextStep() has already run from the button's inline onclick and shows
+            // .field-error messages when an answer is missing. Count only steps that passed.
+            if (document.querySelector('.field-error')) return;
             gtag('event', 'calculator_step_' + (i+1) + '_complete', {event_category: 'engagement'});
             try { if (typeof fbq === 'function') fbq('trackCustom', 'CalculatorStep', {step: i + 1}); } catch (e) {}
         });
