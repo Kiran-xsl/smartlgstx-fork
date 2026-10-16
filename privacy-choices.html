@@ -103,7 +103,7 @@
 .pc-switch[aria-checked="true"] .pc-switch__knob{transform:translateX(26px);background:#001850}
 .pc-switch:focus-visible{outline:3px solid #001850;outline-offset:3px}
 .pc-switch:disabled{cursor:not-allowed;opacity:.55}
-.pc-dot{flex:none;width:.5rem;height:.5rem;border-radius:9999px;background:#94a3b8}
+.pc-dot{flex:none;width:.5rem;height:.5rem;margin-top:.375rem;border-radius:9999px;background:#94a3b8}
 .pc-dot--on{background:#E5C94D}
 .pc-point{position:relative;padding-left:1.25rem}
 .pc-point:before{content:"";position:absolute;left:0;top:.55rem;width:.5rem;height:.5rem;border-radius:9999px;background:#FADC61}
@@ -194,7 +194,7 @@
                     <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 rounded-full px-2.5 py-1" id="pc-gpc" hidden>
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.5 6.5l2.2 2.2L9.5 3.5"/></svg>Opt-Out Preference Signal Honored
                     </span>
-                    <p class="flex items-center gap-2 text-sm text-gray-600" id="pc-status-row"><span class="pc-dot" id="pc-dot" aria-hidden="true"></span><span id="pc-status" aria-live="polite">Sharing is on in this browser.</span></p>
+                    <p class="flex items-start gap-2 text-sm text-gray-600" id="pc-status-row"><span class="pc-dot" id="pc-dot" aria-hidden="true"></span><span id="pc-status" aria-live="polite">Sharing is on in this browser.</span></p>
                 </div>
                 <noscript><p class="mt-4 text-sm text-gray-600">This switch needs JavaScript. With JavaScript off, the Meta Pixel can't run either, so nothing is shared.</p></noscript>
             </div>
