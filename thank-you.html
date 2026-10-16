@@ -419,12 +419,14 @@ src="https://www.facebook.com/tr?id=1598560534657972&ev=PageView&noscript=1"
                         product_category: lead.category || '(not set)',
                         page: '/thank-you'
                     });
-                    // The same confirmed lead for the Meta Pixel. Category only, nothing personal.
-                    if (typeof fbq === 'function') fbq('track', 'Lead', {
-                        form_id: lead.form || 'auditForm',
-                        lead_source: 'audit_form',
-                        product_category: lead.category || '(not set)'
-                    });
+                    // The same confirmed lead for the Meta Pixel, nothing personal. The contact
+                    // form has no industry field, so the category is sent only when there is one.
+                    // Inside try, so a Meta error can't stop the lead being marked as counted.
+                    try {
+                        var metaLead = { form_id: lead.form || 'auditForm', lead_source: 'audit_form' };
+                        if (lead.category) metaLead.product_category = lead.category;
+                        if (typeof fbq === 'function') fbq('track', 'Lead', metaLead);
+                    } catch (e) {}
                     lead.counted = true;
                     try { sessionStorage.setItem(KEY, JSON.stringify(lead)); } catch (e) {}
                 }

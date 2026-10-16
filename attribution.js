@@ -49,7 +49,8 @@
   }
 
   function fire(eventName, extra) {
-    fireMeta(eventName, extra);
+    // A Meta failure must never cost the GA4 event
+    try { fireMeta(eventName, extra); } catch (e) {}
     if (typeof gtag !== 'function') return;
     var payload = Object.assign(
       { page: window.location.pathname },
