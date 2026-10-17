@@ -1,0 +1,96 @@
+/* Smart LGSTX: sitewide contact buttons (Push 11)
+   Nav: Contact Us, phone number and Book button with Chris's face.
+   Phones: the nav hides on scroll down and returns on scroll up; Call and Book
+   stay pinned at the bottom (hidden over each page's own call/book buttons and
+   over the footer, so it never covers the privacy links).
+   Plain CSS on purpose: half the pages don't load Tailwind. */
+
+.sl-site-nav { position: sticky; top: 0; z-index: 100; transition: transform .25s ease; will-change: transform; }
+
+/* Nav contact group */
+.sl-nav-cta { display: flex; align-items: center; gap: 18px; }
+.sl-nav-cta a { text-decoration: none; white-space: nowrap; }
+.sl-nav-contact { color: rgba(255,255,255,.85); font-size: .95rem; }
+.sl-nav-contact:hover, .sl-nav-contact:focus-visible { color: #FADC61; }
+.sl-nav-phone { display: inline-flex; align-items: center; gap: 6px; color: #fff; font-weight: 600; font-size: .95rem; }
+.sl-nav-phone svg { width: 16px; height: 16px; flex: none; }
+.sl-nav-phone:hover, .sl-nav-phone:focus-visible { color: #FADC61; }
+.sl-nav-book { display: inline-flex; align-items: center; gap: 8px; background: #FADC61; color: #001850 !important; font-weight: 700; font-size: .95rem; line-height: 1; padding: 5px 16px 5px 5px; border-radius: 999px; transition: background .2s; }
+.sl-nav-book:hover, .sl-nav-book:focus-visible { background: #e8c94a; }
+.sl-nav-book img, .sl-bar__face { border-radius: 50%; object-fit: cover; background: #e2e8f0; flex: none; }
+.sl-nav-book img { width: 34px; height: 34px; }
+.sl-short { display: none; }
+.sl-nav-contact { color: inherit; font-size: inherit; }
+.sl-site-nav a, .sl-site-nav .nav-dropdown-trigger { white-space: nowrap; }
+.sl-site-nav .logo, .sl-site-nav .nav-container > a:first-child { flex: none; white-space: nowrap; }
+/* Narrower desktops: tighter spacing, then a shorter Book label, then the
+   number folds into the phone icon (still a tap/click-to-call link) */
+@media (max-width: 1500px) {
+  .sl-site-nav .nav-links { gap: 22px; }
+  .sl-site-nav .space-x-8 > :not([hidden]) ~ :not([hidden]) { margin-left: 22px; }
+  .sl-nav-cta { gap: 14px; }
+  .sl-nav-book .sl-long { display: none; }
+  .sl-nav-book .sl-short { display: inline; }
+}
+@media (max-width: 1280px) {
+  .sl-nav-phone .sl-num { display: none; }
+  .sl-site-nav .nav-links { gap: 18px; }
+  .sl-site-nav .space-x-8 > :not([hidden]) ~ :not([hidden]) { margin-left: 18px; }
+}
+@media (max-width: 768px) {
+  .sl-nav-cta { display: none !important; }
+}
+
+/* Phone bottom bar */
+.sl-bar { display: none; }
+@media (max-width: 768px) {
+  .sl-site-nav.sl-nav-hidden { transform: translateY(-100%); }
+  .sl-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(0,24,80,.97); box-shadow: 0 -6px 20px rgba(0,0,0,.18);
+    transform: translateY(110%); transition: transform .25s ease;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  .sl-bar.is-on { transform: none; }
+  .sl-bar__face { width: 44px; height: 44px; border: 2px solid #FADC61; }
+  .sl-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 10px; font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap; }
+  .sl-bar__call { color: #fff; border: 2px solid rgba(255,255,255,.35); }
+  .sl-bar__call svg { width: 18px; height: 18px; }
+  .sl-bar__book { background: #FADC61; color: #001850; }
+  /* The old round call buttons are replaced by the bar */
+  .sticky-phone { display: none !important; }
+}
+@media (max-width: 359px) { .sl-bar__face { display: none; } }
+@media (prefers-reduced-motion: reduce) { .sl-site-nav, .sl-bar { transition: none; } }
+
+/* Grouped phone menu */
+.sl-burger { display: none; background: none; border: 0; color: #fff; padding: 8px; cursor: pointer; }
+.sl-mm-wrap { display: none; }
+@media (max-width: 768px) {
+  /* Guide, FAQ and privacy headers: links fold into the menu */
+  header.sl-site-nav { flex-wrap: wrap; padding: 14px 20px !important; }
+  header.sl-site-nav > nav, header.sl-site-nav > a[href="/"][style*="94A3B8"] { display: none !important; }
+  .sl-burger { display: block; }
+  .sl-mm-wrap { flex-basis: 100%; }
+  .sl-mm-wrap.active { display: block; }
+  .mobile-menu.active, .mobile-menu.open { max-height: calc(100vh - 64px); overflow-y: auto; overscroll-behavior: contain; }
+}
+.mobile-menu .sl-mm { padding: 4px 4px 12px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; text-align: left; }
+.mobile-menu .sl-mm a { border: 0; text-decoration: none; }
+.sl-mm__acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 4px 0 14px; border-bottom: 1px solid rgba(255,255,255,.12); margin-bottom: 4px; }
+.mobile-menu .sl-mm a.sl-mm__act { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 6px 4px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,.35); color: #fff; font-weight: 700; font-size: .9rem; text-align: center; text-decoration: none; }
+.mobile-menu .sl-mm a.sl-mm__talk { display: flex; align-items: center; gap: 12px; margin: 12px 0 10px; padding: 8px 14px 8px 8px; min-height: 60px; border-radius: 999px; background: #FADC61; color: #001850; text-decoration: none; }
+.mobile-menu .sl-mm a.sl-mm__talk img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; border: 2px solid #fff; }
+.sl-mm__talk strong { display: block; font-size: 1.1rem; font-weight: 800; line-height: 1.2; }
+.sl-mm__talk small { display: block; font-size: .8rem; font-weight: 500; color: #1e3a6e; }
+.mobile-menu .sl-mm a.sl-mm__row, .sl-mm__grp > summary { display: flex; align-items: center; justify-content: space-between; min-height: 50px; padding: 0 6px; color: #fff; font-size: 1.05rem; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.08); cursor: pointer; list-style: none; }
+.sl-mm__grp > summary::-webkit-details-marker { display: none; }
+.sl-mm__grp > summary::after { content: ""; width: 9px; height: 9px; border-right: 2px solid #FADC61; border-bottom: 2px solid #FADC61; transform: rotate(45deg); margin: -4px 6px 0 0; transition: transform .2s; }
+.sl-mm__grp[open] > summary::after { transform: rotate(-135deg); margin-top: 4px; }
+.mobile-menu .sl-mm .sl-mm__grp a { display: block; padding: 11px 6px 11px 18px; color: rgba(255,255,255,.85); font-size: .97rem; font-weight: 500; }
+.sl-mm__grp[open] { padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.sl-mm__grp[open] > summary { border-bottom: 0; }
+.mobile-menu .sl-mm a[aria-current="page"] { color: #FADC61; }
+.mobile-menu .sl-mm a:focus-visible, .sl-mm__grp > summary:focus-visible { outline: 2px solid #FADC61; outline-offset: 2px; }
