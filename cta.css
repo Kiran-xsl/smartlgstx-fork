@@ -32,6 +32,22 @@
   .sl-nav-book .sl-long { display: none; }
   .sl-nav-book .sl-short { display: inline; }
 }
+/* Tablets (769 to 1100px): only the Book button, the same footprint as the
+   old Talk to Chris button, so the nav still fits on one line */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .sl-nav-contact, .sl-nav-phone { display: none !important; }
+  .sl-site-nav .nav-links { gap: 16px !important; }
+  .sl-site-nav .space-x-8 > :not([hidden]) ~ :not([hidden]) { margin-left: 14px !important; }
+  .sl-nav-book { padding: 4px 12px 4px 4px; font-size: .9rem; }
+  .sl-nav-book img { width: 28px; height: 28px; }
+}
+@media (min-width: 769px) and (max-width: 919px) {
+  .sl-nav-book .sl-short { display: none; }
+  .sl-nav-book::after { content: "Book"; }
+  .sl-site-nav .nav-links { gap: 12px !important; }
+  .sl-site-nav .space-x-8 > :not([hidden]) ~ :not([hidden]) { margin-left: 11px !important; }
+  .sl-site-nav .nav-container, .sl-site-nav > div { padding-left: 16px !important; padding-right: 16px !important; }
+}
 @media (max-width: 1280px) {
   .sl-nav-phone .sl-num { display: none; }
   .sl-site-nav .nav-links { gap: 18px; }
