@@ -903,6 +903,17 @@
             }
         }
         
+        /* Meet Chris */
+        .meet-chris { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:64px; align-items:center; max-width:1000px; margin:0 auto; }
+        .meet-chris-photo { display:flex; justify-content:center; }
+        .meet-chris-photo picture { display:block; width:100%; max-width:360px; }
+        .meet-chris-img { display:block; width:100%; height:auto; aspect-ratio:1/1; border-radius:50%; box-shadow:0 0 0 6px #fff, 0 12px 32px rgba(0,24,80,0.18); }
+        @media (max-width: 768px) {
+            .meet-chris { grid-template-columns:1fr; gap:32px; }
+            .meet-chris-photo picture { max-width:200px; }
+            .meet-chris h2 { font-size:1.6rem !important; }
+        }
+
         /* Sticky Phone Button (Mobile Only) */
         .sticky-phone {
             display: none;
@@ -1187,9 +1198,9 @@ fbq('track', 'PageView');
     <!-- Meet Chris -->
     <section class="section section-gray">
         <div class="section-container">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; max-width:1000px; margin:0 auto;">
-                <div style="border-radius:12px; overflow:hidden;">
-                    <img src="images/chris-tweedy.jpg" alt="Chris Tweedy, founder of Smart LGSTX, former carrier executive" style="width:100%; height:auto; display:block; object-fit:cover;">
+            <div class="meet-chris">
+                <div class="meet-chris-photo">
+                    <picture><source type="image/webp" srcset="/images/chris-tweedy-headshot-400.webp 400w, /images/chris-tweedy-headshot-800.webp 800w" sizes="(max-width: 768px) 200px, 360px"><img src="/images/chris-tweedy-headshot-800.jpg" alt="Chris Tweedy, founder and CEO of Smart LGSTX, former carrier executive" class="meet-chris-img" width="800" height="800" loading="lazy" decoding="async"></picture>
                 </div>
                 <div>
                     <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:12px;">Who You're Working With</div>
