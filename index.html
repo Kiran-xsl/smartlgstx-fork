@@ -903,6 +903,104 @@
             }
         }
         
+
+        /* ===== Push 10: homepage engagement ===== */
+        .nudge { text-align:center; padding:8px 24px 0; }
+        .nudge p { font-size:1rem; color:var(--gray-600); margin:0 0 14px; }
+        .nudge .btn { min-height:48px; }
+        .btn-navy { background:var(--navy); color:#fff; }
+        .btn-navy:hover { background:var(--navy-light); }
+        .link-arrow { display:inline-block; margin-top:12px; font-weight:600; color:var(--navy); text-decoration:none; border-bottom:2px solid var(--gold); padding-bottom:2px; }
+        .section-navy .link-arrow { color:#fff; }
+
+        /* Testimonials: show the start, tap to read the rest */
+        .slx-t-card blockquote p.is-clamped { display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+        .t-more { align-self:flex-start; margin-top:10px; background:none; border:0; padding:6px 0; font:inherit; font-size:.95rem; font-weight:600; color:var(--navy); border-bottom:2px solid var(--gold); cursor:pointer; }
+        .t-more[hidden] { display:none; }
+
+        /* Hidden charges: tap a row to see why */
+        .problem-list details { width:100%; }
+        .problem-list summary { list-style:none; display:flex; align-items:flex-start; gap:12px; cursor:pointer; color:var(--gray-800); font-weight:500; min-height:28px; }
+        .problem-list summary::-webkit-details-marker { display:none; }
+        .problem-list summary::after { content:'+'; margin-left:auto; font-weight:700; color:var(--navy); font-size:1.15rem; line-height:1.2; padding-left:8px; }
+        .problem-list details[open] summary::after { content:'\2212'; }
+        .problem-list details p { margin:10px 0 2px 32px; font-size:.92rem; line-height:1.6; color:var(--gray-600); }
+        .problem-list li { display:block; }
+        .problem-hint { font-size:.85rem; color:var(--slate); margin:-8px 0 8px; }
+
+        /* Savings estimator */
+        .estimator { max-width:640px; margin:56px auto 0; background:var(--navy); color:#fff; border-radius:16px; padding:32px 28px; text-align:center; box-shadow:0 12px 32px rgba(0,24,80,.18); }
+        .estimator h3 { font-size:1.35rem; font-weight:800; margin:0 0 6px; }
+        .estimator .est-q { color:rgba(255,255,255,.85); margin:0 0 20px; font-size:1rem; }
+        .estimator output.est-spend { display:block; font-size:1.6rem; font-weight:800; color:#fff; margin-bottom:10px; }
+        .estimator input[type=range] { width:100%; accent-color:var(--gold); height:32px; cursor:pointer; }
+        .est-scale { display:flex; justify-content:space-between; font-size:.8rem; color:rgba(255,255,255,.7); margin-top:2px; }
+        .est-result { margin:22px 0 4px; font-size:1rem; color:rgba(255,255,255,.85); }
+        .est-result strong { display:block; font-size:2rem; color:var(--gold); letter-spacing:-.5px; margin-top:4px; }
+        .est-note { font-size:.8rem; color:rgba(255,255,255,.7); margin:6px 0 20px; }
+        .estimator .btn { min-height:48px; }
+        .estimator .link-arrow { color:#fff; margin-left:0; }
+
+        /* How it works + why us, merged */
+        .why-chips { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:900px; margin:56px auto 0; }
+        .why-chip { background:#fff; border:1px solid var(--gray-200); border-radius:12px; padding:18px 20px; }
+        .why-chip strong { display:block; color:var(--navy); font-size:1rem; margin-bottom:4px; }
+        .why-chip span { color:var(--gray-600); font-size:.92rem; line-height:1.5; }
+
+        /* FAQ as tap to open questions */
+        .faq-item { padding:0; }
+        .faq-item summary { list-style:none; display:flex; align-items:center; gap:16px; padding:20px 24px; cursor:pointer; min-height:56px; }
+        .faq-item summary::-webkit-details-marker { display:none; }
+        .faq-item summary h3 { margin:0; flex:1; }
+        .faq-item summary::after { content:'+'; font-size:1.4rem; font-weight:600; color:var(--navy); line-height:1; }
+        .faq-item[open] summary::after { content:'\2212'; }
+        .faq-item p { padding:0 24px 22px; }
+        .faq-item summary:focus-visible, .problem-list summary:focus-visible, .t-more:focus-visible { outline:3px solid var(--gold); outline-offset:2px; border-radius:6px; }
+
+        /* Sticky call / book bar (phones) */
+        .sticky-bar { display:none; }
+        @media (max-width: 768px) {
+            .stats { padding:28px 12px; }
+            .stats-container { grid-template-columns:repeat(3,1fr) !important; gap:8px; }
+            .stat-value { font-size:1.6rem; letter-spacing:-.5px; }
+            .stat-label { font-size:.72rem; line-height:1.35; }
+            .section { padding:64px 20px; }
+            .section-header { margin-bottom:36px; }
+            .why-chips { grid-template-columns:1fr; gap:10px; margin-top:36px; }
+            .estimator { margin-top:40px; padding:26px 20px; }
+            .nudge .btn, .estimator .btn { width:100%; }
+            .steps-grid { gap:20px !important; }
+            .step { display:grid; grid-template-columns:44px 1fr; column-gap:14px; text-align:left; }
+            .step-number { width:44px; height:44px; border-radius:12px; font-size:1.05rem; margin:0; grid-row:span 2; }
+            .step h3 { margin:2px 0 4px; }
+            .sticky-phone { display:none !important; }
+            .section-title { font-size:1.75rem; }
+            .section-subtitle { font-size:1rem; }
+            .problem-content h2 { font-size:1.65rem; margin-bottom:16px; }
+            .problem-content p { font-size:1rem; }
+            .problem-grid { gap:28px !important; }
+            .problem-card { padding:22px 18px; }
+            .problem-list li { padding:10px 0; }
+            .slx-t-section { padding:0 20px 56px !important; }
+            .slx-t-head { margin-bottom:24px !important; }
+            .slx-t-grid { gap:12px !important; }
+            .slx-t-card { padding:22px 20px 18px !important; }
+            .slx-t-card blockquote p { font-size:1rem !important; }
+            .slx-t-card blockquote p.is-clamped { -webkit-line-clamp:3; }
+            .faq-item summary { padding:16px 18px; }
+            .faq-item p { padding:0 18px 18px; }
+            .cta { padding:64px 20px; }
+            .industries-grid { gap:28px !important; }
+
+            .sticky-bar { position:fixed; left:0; right:0; bottom:0; z-index:90; display:flex; gap:10px; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:rgba(0,24,80,.97); box-shadow:0 -6px 20px rgba(0,0,0,.18); transform:translateY(110%); transition:transform .25s ease; }
+            .sticky-bar.is-on { transform:none; }
+            .sticky-bar a { flex:1; display:flex; align-items:center; justify-content:center; gap:8px; min-height:48px; border-radius:10px; font-weight:700; font-size:1rem; text-decoration:none; }
+            .sticky-bar .sb-call { flex:0 0 38%; color:#fff; border:2px solid rgba(255,255,255,.35); }
+            .sticky-bar .sb-book { background:var(--gold); color:var(--navy); }
+            .footer-bottom { padding-bottom:84px !important; }
+        }
+        @media (prefers-reduced-motion: reduce) { .sticky-bar { transition:none; } }
+
         /* Chris trust strip, phones only */
         .hero-chris { display:none; }
         @media (max-width: 768px) {
@@ -1235,7 +1333,7 @@ fbq('track', 'PageView');
     </section>
 
     <!-- Client Testimonials -->
-    <div class="slx-t-section" role="region" aria-labelledby="slx-t-heading">
+    <div class="slx-t-section" role="region" aria-labelledby="slx-t-heading" data-cta-location="testimonials">
         <div class="slx-t-wrap">
             <div class="slx-t-head">
                 <span class="slx-t-label">Client Feedback</span>
@@ -1246,6 +1344,7 @@ fbq('track', 'PageView');
                 <figure class="slx-t-card">
                     <svg class="slx-t-mark" viewBox="0 0 32 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 24V14.4C0 6.4 4.3 1.6 12.2 0l1.4 3.2C9 4.6 6.9 7.4 6.6 11.2H12V24H0zm18 0V14.4C18 6.4 22.3 1.6 30.2 0l1.4 3.2C27 4.6 24.9 7.4 24.6 11.2H30V24H18z"/></svg>
                     <blockquote><p>We ship bed frames and accent chairs, so the extra fees can really add up. Smart LGSTX walked us through charges we'd been paying for years without questioning. They explained everything clearly and helped us get a better agreement with our carrier.</p></blockquote>
+                    <button type="button" class="t-more" data-track="testimonial_expand" data-track-item="Rachel Bennett" hidden>Read more</button>
                     <figcaption class="slx-t-person">
                         <span class="slx-t-name">Rachel Bennett</span>
                         <span class="slx-t-role">Furniture and Home Goods</span>
@@ -1254,6 +1353,7 @@ fbq('track', 'PageView');
                 <figure class="slx-t-card">
                     <svg class="slx-t-mark" viewBox="0 0 32 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 24V14.4C0 6.4 4.3 1.6 12.2 0l1.4 3.2C9 4.6 6.9 7.4 6.6 11.2H12V24H0zm18 0V14.4C18 6.4 22.3 1.6 30.2 0l1.4 3.2C27 4.6 24.9 7.4 24.6 11.2H30V24H18z"/></svg>
                     <blockquote><p>I thought we'd already negotiated pretty good shipping rates for our brake kits and suspension parts. Turns out there were a few things we'd missed. The team knew what to look for, and I didn't have to spend my week going back and forth with the carrier.</p></blockquote>
+                    <button type="button" class="t-more" data-track="testimonial_expand" data-track-item="Marcus Collins" hidden>Read more</button>
                     <figcaption class="slx-t-person">
                         <span class="slx-t-name">Marcus Collins</span>
                         <span class="slx-t-role">Automotive Parts</span>
@@ -1262,12 +1362,17 @@ fbq('track', 'PageView');
                 <figure class="slx-t-card">
                     <svg class="slx-t-mark" viewBox="0 0 32 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 24V14.4C0 6.4 4.3 1.6 12.2 0l1.4 3.2C9 4.6 6.9 7.4 6.6 11.2H12V24H0zm18 0V14.4C18 6.4 22.3 1.6 30.2 0l1.4 3.2C27 4.6 24.9 7.4 24.6 11.2H30V24H18z"/></svg>
                     <blockquote><p>Our olive oil gift sets are heavy, and shipping was eating into our margins. What I appreciate most was getting a clear explanation of where the money was going. No confusing pitch, just someone willing to answer our questions and help us bring those costs down.</p></blockquote>
+                    <button type="button" class="t-more" data-track="testimonial_expand" data-track-item="Elena Ramirez" hidden>Read more</button>
                     <figcaption class="slx-t-person">
                         <span class="slx-t-name">Elena Ramirez</span>
                         <span class="slx-t-role">Olive Oil and Specialty Foods</span>
                     </figcaption>
                 </figure>
             </div>
+        </div>
+        <div class="nudge" data-cta-location="testimonials">
+            <p>Want that kind of clarity on your own contract?</p>
+            <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/smartlgstx/30min_savings_consultation'});return false;" class="btn btn-navy btn-large">Book 15 Min with Chris</a>
         </div>
     </div>
 
@@ -1278,53 +1383,72 @@ fbq('track', 'PageView');
                 <div class="problem-content">
                     <h2>Your Carrier Contract Has 250+ Line Items. Your Rep Negotiated Maybe 15.</h2>
                     <p>If your company spends $100K–$5MM per year with the major small parcel carriers, most of your shipping costs aren't in your base rates. They're in surcharges.</p>
-                    <p><strong>Large package fees. Additional handling. Residential delivery surcharges. Dimensional weight multipliers. Demand surcharges.</strong></p>
                     <p>Your carrier rep's job is to maximize what you pay. Not minimize it. And most companies, even sophisticated ones, have never had someone audit those contracts from the inside.</p>
                 </div>
                 <div class="problem-card">
                     <h3>The Hidden Charges on Every Invoice</h3>
+                    <p class="problem-hint">Tap any charge to see what triggers it.</p>
                     <ul class="problem-list">
-                        <li><span class="x-icon">✕</span> Large Package Surcharges ($219.50–$331.00/package)</li>
-                        <li><span class="x-icon">✕</span> Additional Handling Fees ($29–$58/package)</li>
-                        <li><span class="x-icon">✕</span> Residential Delivery Surcharge</li>
-                        <li><span class="x-icon">✕</span> Dimensional Weight Multipliers</li>
-                        <li><span class="x-icon">✕</span> Peak Season Penalties</li>
-                        <li><span class="x-icon">✕</span> Delivery Area Surcharges (DAS)</li>
+                        <li><details data-track="surcharge_open" data-track-item="large_package"><summary><span class="x-icon" aria-hidden="true">✕</span>Large Package Surcharges ($219.50 to $331.00 per package)</summary><p>Kicks in when a box is over 96 inches long, over 130 inches in length plus girth, or over 110 lbs. The package also bills at a 90 lb minimum.</p></details></li>
+                        <li><details data-track="surcharge_open" data-track-item="additional_handling"><summary><span class="x-icon" aria-hidden="true">✕</span>Additional Handling Fees ($26.75 to $58.75 per package)</summary><p>Triggered by a longest side over 48 inches, a weight over 50 lbs, or a box bigger than 10,368 cubic inches. For bulky products that can be most orders.</p></details></li>
+                        <li><details data-track="surcharge_open" data-track-item="residential"><summary><span class="x-icon" aria-hidden="true">✕</span>Residential Delivery Surcharge</summary><p>Added to every delivery to a home, about $6.50 a package at 2026 list prices. For DTC brands it lands on nearly every order.</p></details></li>
+                        <li><details data-track="surcharge_open" data-track-item="dim_weight"><summary><span class="x-icon" aria-hidden="true">✕</span>Dimensional Weight Multipliers</summary><p>You pay for box size, not weight, whenever length x width x height divided by the carrier divisor beats the scale. A 20 lb box measuring 24 x 18 x 18 inches bills as 56 lbs.</p></details></li>
+                        <li><details data-track="surcharge_open" data-track-item="peak"><summary><span class="x-icon" aria-hidden="true">✕</span>Peak Season Penalties</summary><p>Demand surcharges added per package during the carrier's busiest weeks, on top of every other fee.</p></details></li>
+                        <li><details data-track="surcharge_open" data-track-item="das"><summary><span class="x-icon" aria-hidden="true">✕</span>Delivery Area Surcharges (DAS)</summary><p>Charged for ZIP codes the carrier classes as rural or hard to reach. Remote areas in the lower 48 run $16.50 a package at 2026 list prices.</p></details></li>
                     </ul>
                 </div>
+            </div>
+            <div class="estimator" id="estimate" data-cta-location="estimator">
+                <h3>What could that be worth to you?</h3>
+                <p class="est-q"><label for="est-spend">Your yearly parcel shipping spend</label></p>
+                <output class="est-spend" for="est-spend" id="est-spend-out">$250K</output>
+                <input type="range" id="est-spend" min="0" max="100" step="1" value="40" aria-describedby="est-result">
+                <div class="est-scale" aria-hidden="true"><span>$50K</span><span>$5M+</span></div>
+                <p class="est-result" id="est-result" aria-live="polite">Clients typically save 10 to 20%, which would be<strong id="est-range">$25K to $50K</strong>a year</p>
+                <p class="est-note">A typical range, not a quote. Your real number depends on your contract.</p>
+                <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/smartlgstx/30min_savings_consultation'});return false;" class="btn btn-primary btn-large">Get Your Real Number in 15 Min</a><br>
+                <a href="/shipping-savings-calculator" class="link-arrow">Or use the detailed calculator</a>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
+    <!-- How It Works (merged with Why Smart LGSTX) -->
     <section class="section section-gray">
         <div class="section-container">
             <div class="section-header">
                 <span class="section-label">How It Works</span>
                 <h2 class="section-title">From Audit to Savings in Weeks, Not Months</h2>
-                <p class="section-subtitle">Most consultants work from rate comparison spreadsheets. Our team spent 50+ years on the carrier side. They know what's negotiable and what carriers will never offer unless pushed.</p>
+                <p class="section-subtitle">Our team spent 50+ years on the carrier side. We know what's negotiable and what carriers never offer unless pushed.</p>
             </div>
             <div class="steps-grid">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Free Estimate</h3>
-                    <p>Tell us your product category and shipping volume. We give you a savings estimate in 15 minutes, specific to your vertical.</p>
+                    <p>Share your product category and volume. Get a savings estimate in 15 minutes.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Contract Audit</h3>
-                    <p>Submit your shipping data. Our team personally reviews every line item.</p>
+                    <h3>Line by Line Audit</h3>
+                    <p>Our team personally reviews every line item in your contract.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Savings Presented</h3>
-                    <p>We present a specific dollar estimate before you commit.</p>
+                    <h3>A Dollar Number First</h3>
+                    <p>You see a specific dollar estimate before you commit. If it doesn't make sense, we'll tell you.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Ongoing Savings</h3>
-                    <p>Savings in place within first week. Plus ongoing reporting and claims support to maximize your savings over time.</p>
+                    <h3>Savings in Week One</h3>
+                    <p>Savings in place within the first week, then ongoing reporting and claims support.</p>
                 </div>
+            </div>
+            <div class="why-chips">
+                <div class="why-chip"><strong>Not a broker</strong><span>No commissions from carriers. We work for you.</span></div>
+                <div class="why-chip"><strong>$0 upfront</strong><span>There is no fee unless we save you money.</span></div>
+                <div class="why-chip"><strong>Faster</strong><span>Most shipping consultants take 3 to 6 months.</span></div>
+            </div>
+            <div class="nudge" data-cta-location="how-it-works" style="margin-top:36px;">
+                <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/smartlgstx/30min_savings_consultation'});return false;" class="btn btn-primary btn-large">Start with a Free 15 Min Estimate</a>
             </div>
         </div>
     </section>
@@ -1345,6 +1469,7 @@ fbq('track', 'PageView');
                         <li><span class="check-icon">✓</span> You're a B2B or DTC company with $5M–$30M in revenue</li>
                         <li><span class="check-icon">✓</span> You've negotiated rates before, and still feel like you're overpaying</li>
                     </ul>
+                    <a href="/contact" class="link-arrow" data-cta-location="fit-list">Sound like you? Talk to Chris →</a>
                 </div>
                 <div class="industries-cards">
                     <a href="/furniture-shipping-savings" class="industry-card">
@@ -1376,47 +1501,6 @@ fbq('track', 'PageView');
         </div>
     </section>
 
-    <!-- Benefits -->
-    <section class="section">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-label">Why Smart LGSTX</span>
-                <h2 class="section-title">Why Companies Choose Smart LGSTX</h2>
-                <p class="section-subtitle">Here's why.</p>
-            </div>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                    </div>
-                    <h3>Insider Knowledge</h3>
-                    <p>Our team has 50+ years of combined experience working for one of the major carriers. They know which categories are negotiable, and which ones your rep hopes you never bring up.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <h3>Speed That Others Can't Match</h3>
-                    <p>Most shipping consultants take 3–6 months. We deliver initial savings within days.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <h3>Zero Risk</h3>
-                    <p>Zero risk to get started. Our free audit costs you nothing. We only move forward if the savings are real, and our fee applies only when savings are delivered.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                    </div>
-                    <h3>Specific Numbers</h3>
-                    <p>We give you a dollar estimate before you commit. Not a percentage range. A number. If it doesn't make sense, we'll tell you.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FAQ -->
     <section class="section section-gray">
         <div class="section-container">
@@ -1425,38 +1509,38 @@ fbq('track', 'PageView');
                 <h2 class="section-title">Frequently Asked Questions</h2>
             </div>
             <div class="faq-list">
-                <div class="faq-item">
-                    <h3>How much can I realistically save on carrier shipping?</h3>
+                <details class="faq-item" data-track="faq_open" data-track-item="How much can I realistically save on carrier shipping?" open>
+                    <summary><h3>How much can I realistically save on carrier shipping?</h3></summary>
                     <p>Most clients save 10–20% of their total annual carrier spend. For specific surcharge categories (large package fees, additional handling, and residential delivery surcharges), individual reductions of 15–25% are common. For a company spending $200K/year on shipping, that typically means $30K–$40K back annually, with initial savings visible within the first week.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>What is a carrier contract audit and why do I need one?</h3>
+                </details>
+                <details class="faq-item" data-track="faq_open" data-track-item="What is a carrier contract audit and why do I need one?">
+                    <summary><h3>What is a carrier contract audit and why do I need one?</h3></summary>
                     <p>A carrier contract audit is a line-by-line review of every charge and rate category in your carrier agreement. The average carrier contract has 250+ line items. Most businesses have only negotiated a handful of them. An audit identifies the categories where you're overpaying (large package surcharges, dimensional weight divisors, accessorial fees) and builds the case for renegotiation.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>What are accessorial fees and why do they matter?</h3>
+                </details>
+                <details class="faq-item" data-track="faq_open" data-track-item="What are accessorial fees and why do they matter?">
+                    <summary><h3>What are accessorial fees and why do they matter?</h3></summary>
                     <p>Accessorial fees are add-on charges that carriers apply on top of base shipping rates. They include large package surcharges, additional handling fees, residential delivery surcharges, delivery area surcharges, and demand surcharges. For companies shipping heavy or bulky products, accessorial fees often represent more than the base rate, and they're the least-negotiated part of most carrier contracts.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Is Smart LGSTX a broker, a consultant, or a negotiator?</h3>
+                </details>
+                <details class="faq-item" data-track="faq_open" data-track-item="Is Smart LGSTX a broker, a consultant, or a negotiator?">
+                    <summary><h3>Is Smart LGSTX a broker, a consultant, or a negotiator?</h3></summary>
                     <p>Smart LGSTX is a shipping optimization service, not a broker. We don't earn commissions from carriers. We start with a free audit of your current carrier pricing, identify where you're overpaying, and implement savings. Our team has 50+ years of combined experience on the carrier side, which means we know what's negotiable and what your rep will never bring to the table on their own.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>What size company does Smart LGSTX work with?</h3>
+                </details>
+                <details class="faq-item" data-track="faq_open" data-track-item="What size company does Smart LGSTX work with?">
+                    <summary><h3>What size company does Smart LGSTX work with?</h3></summary>
                     <p>We focus on companies spending $100K–$5MM per year with the major small parcel carriers, typically with $5M–$30M in annual revenue. The best fit is a company shipping heavy, bulky, or oversized products (furniture, auto parts, fitness equipment, mattresses, building materials) where surcharges stack on every shipment. If your spend or product profile is outside that range, we'll tell you honestly on the first call.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Do you work with companies using multiple carriers?</h3>
+                </details>
+                <details class="faq-item" data-track="faq_open" data-track-item="Do you work with companies using multiple carriers?">
+                    <summary><h3>Do you work with companies using multiple carriers?</h3></summary>
                     <p>Yes, we work with companies using the major small parcel carriers.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Do you handle international shipping, both imports and exports?</h3>
+                </details>
+                <details class="faq-item" data-track="faq_open" data-track-item="Do you handle international shipping, both imports and exports?">
+                    <summary><h3>Do you handle international shipping, both imports and exports?</h3></summary>
                     <p>Yes. Smart LGSTX audits both inbound import and outbound export carrier contracts. International shipping is one of the highest-margin areas for major carriers and one of the least-scrutinized by shippers. Whether you're importing from overseas suppliers or shipping to international customers, we identify what's recoverable and show you the numbers before you commit to anything.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>What makes Smart LGSTX different from other shipping consultants?</h3>
+                </details>
+                <details class="faq-item" data-track="faq_open" data-track-item="What makes Smart LGSTX different from other shipping consultants?">
+                    <summary><h3>What makes Smart LGSTX different from other shipping consultants?</h3></summary>
                     <p>Most shipping consultants work from benchmarking data: they compare your rates to industry averages. Our team has 50+ years of combined experience on the carrier side, sitting across the table from thousands of negotiations. They know which line items carriers are willing to move, which ones they never volunteer, and which tactics carrier reps use to protect their margins. That insider knowledge is what you're actually hiring.</p>
-                </div>
+                </details>
             </div>
         </div>
     </section>
@@ -1525,6 +1609,12 @@ fbq('track', 'PageView');
         </div>
     </footer>
 
+    <!-- Sticky Call / Book bar (phones, homepage) -->
+    <div class="sticky-bar" id="stickyBar" data-cta-location="sticky-bar" aria-hidden="true">
+        <a href="tel:+18333654789" class="sb-call" tabindex="-1"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>Call</a>
+        <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/smartlgstx/30min_savings_consultation'});return false;" class="sb-book" tabindex="-1">Book 15 Min with Chris</a>
+    </div>
+
     <!-- Sticky Phone Button (Mobile) -->
     <a href="tel:+18333654789" class="sticky-phone" aria-label="Call us">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
@@ -1536,6 +1626,65 @@ fbq('track', 'PageView');
         function toggleMobileMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
         }
+
+        // Push 10: estimator, testimonial read more, sticky bar
+        (function () {
+            // Savings estimator: slider 0..100 maps $50K..$5M on a log scale
+            var r = document.getElementById('est-spend');
+            if (r) {
+                var out = document.getElementById('est-spend-out'), rng = document.getElementById('est-range'), sent = false;
+                var money = function (v) { return v >= 1e6 ? '$' + (Math.round(v / 1e5) / 10).toString().replace(/\.0$/, '') + 'M' : '$' + Math.round(v / 1e3) + 'K'; };
+                var snap = function (v) { var p = Math.pow(10, Math.floor(Math.log10(v)) - 1) * 5; return Math.round(v / p) * p; };
+                var update = function () {
+                    var v = snap(50000 * Math.pow(100, r.value / 100));
+                    out.textContent = money(v) + (r.value == 100 ? '+' : '');
+                    rng.textContent = money(v * 0.10) + ' to ' + money(v * 0.20);
+                    r.setAttribute('aria-valuetext', money(v) + ' a year');
+                    return v;
+                };
+                update();
+                r.addEventListener('input', update);
+                r.addEventListener('change', function () {
+                    var v = update();
+                    if (!sent && typeof gtag === 'function') {
+                        sent = true;
+                        var band = v < 100000 ? 'under_100k' : v < 250000 ? '100k_250k' : v < 1000000 ? '250k_1m' : v < 5000000 ? '1m_5m' : '5m_plus';
+                        gtag('event', 'estimator_used', { spend_band: band, page: location.pathname });
+                    }
+                });
+            }
+            // Testimonials: clamp to 4 lines, show Read more only when text is cut
+            document.querySelectorAll('.slx-t-card').forEach(function (card) {
+                var p = card.querySelector('blockquote p'), b = card.querySelector('.t-more');
+                if (!p || !b) return;
+                p.classList.add('is-clamped');
+                if (p.scrollHeight - p.clientHeight > 4) {
+                    b.hidden = false;
+                    b.setAttribute('aria-expanded', 'false');
+                    b.addEventListener('click', function () {
+                        var open = p.classList.toggle('is-clamped') === false;
+                        b.textContent = open ? 'Show less' : 'Read more';
+                        b.setAttribute('aria-expanded', String(open));
+                    });
+                } else { p.classList.remove('is-clamped'); }
+            });
+            // Sticky bar: show after the hero, hide over the closing CTA and footer
+            var bar = document.getElementById('stickyBar'), hero = document.querySelector('.hero');
+            if (bar && hero && 'IntersectionObserver' in window) {
+                var heroOut = false, endIn = false;
+                var paint = function () {
+                    var on = heroOut && !endIn;
+                    bar.classList.toggle('is-on', on);
+                    bar.setAttribute('aria-hidden', String(!on));
+                    bar.querySelectorAll('a').forEach(function (a) { a.tabIndex = on ? 0 : -1; });
+                };
+                new IntersectionObserver(function (e) { heroOut = !e[0].isIntersecting; paint(); }).observe(hero);
+                var ends = document.querySelectorAll('section.cta, footer');
+                var seen = new Set();
+                var io = new IntersectionObserver(function (es) { es.forEach(function (x) { x.isIntersecting ? seen.add(x.target) : seen.delete(x.target); }); endIn = seen.size > 0; paint(); });
+                ends.forEach(function (el) { io.observe(el); });
+            }
+        })();
     </script>
     <script src="/attribution.js" defer></script>
 </body>
