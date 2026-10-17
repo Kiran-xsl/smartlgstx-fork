@@ -903,6 +903,23 @@
             }
         }
         
+        /* Chris trust strip, phones only */
+        .hero-chris { display:none; }
+        @media (max-width: 768px) {
+            .hero.hero-with-image { background-image:none !important; padding:28px 20px 36px; }
+            .hero-overlay { background:var(--navy) !important; }
+            .hero-container { padding:0; }
+            .hero h1 { font-size:28px; line-height:1.15; letter-spacing:-0.5px; margin-bottom:14px; }
+            .hero-subtitle { font-size:16px; line-height:1.5; color:rgba(255,255,255,0.85); margin-bottom:18px; }
+            .hero-chris { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+            .hero-chris img { width:56px; height:56px; border-radius:50%; border:2px solid var(--gold); flex:none; }
+            .hero-chris p { margin:0; color:#fff; font-size:15px; line-height:1.35; }
+            .hero-chris strong { display:block; font-weight:700; }
+            .hero-chris span { display:block; font-size:13px; color:rgba(255,255,255,0.85); }
+            .hero-buttons { gap:10px; }
+            .hero-buttons a { width:100%; text-align:center; padding:14px 16px; font-size:16px; }
+        }
+
         /* Meet Chris */
         .meet-chris { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:64px; align-items:center; max-width:1000px; margin:0 auto; }
         .meet-chris-photo { display:flex; justify-content:center; }
@@ -1164,11 +1181,15 @@ fbq('track', 'PageView');
     </nav>
 
     <!-- Hero -->
-    <section class="hero hero-with-image" style="background-image: url('images/SmartLogistics Homepage Hero Section.jpg');" role="img" aria-label="High-volume fulfillment operation representing businesses that ship with UPS and FedEx">
+    <section class="hero hero-with-image" style="background-image: url('images/SmartLogistics Homepage Hero Section.jpg');">
         <div class="hero-overlay"></div>
         <div class="hero-container">
             <h1>You're Probably Overpaying Your Shipping Carrier. <span class="highlight">We Spent 50+ Years on Their Side of the Table.</span></h1>
             <p class="hero-subtitle">Smart LGSTX saves businesses 10–20% on annual shipping spend by identifying the 250+ line items your carrier rep hopes you never ask about. No upfront cost. There is no fee unless we save you money.</p>
+            <div class="hero-chris">
+                <img src="/images/chris-tweedy-headshot-192.webp" alt="Chris Tweedy, founder of Smart LGSTX" width="56" height="56" fetchpriority="low" decoding="async">
+                <p><strong>Chris Tweedy, Founder &amp; CEO</strong><span>15+ years at one of the nation's largest carriers. You talk to him directly.</span></p>
+            </div>
             <div class="hero-buttons">
                 <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/smartlgstx/30min_savings_consultation'});return false;" class="btn btn-primary btn-large">Book a 15-Min Call with Chris</a>
                 <a href="/contact" class="btn btn-outline btn-large">Talk to Chris →</a>
