@@ -163,6 +163,19 @@
     });
   });
 
+  // ── Engagement taps (GA4 only): FAQ opens, surcharge rows, testimonial
+  // "Read more". Elements opt in with data-track and data-track-item.
+  document.addEventListener('toggle', function (e) {
+    var d = e.target;
+    if (!d || d.tagName !== 'DETAILS' || !d.open || !d.dataset.track) return;
+    fire(d.dataset.track, { item: d.dataset.trackItem || '', cta_location: getLocation(d) });
+  }, true);
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('button[data-track]');
+    if (!t || t.getAttribute('aria-expanded') === 'false') return;
+    fire(t.dataset.track, { item: t.dataset.trackItem || '', cta_location: getLocation(t) });
+  });
+
   // ── Calendly booking funnel events ────────────────────────────────────────
   // Calendly posts these from https://calendly.com (the check in Calendly's own
   // embed docs), and posts event_type_viewed twice, milliseconds apart, for one
