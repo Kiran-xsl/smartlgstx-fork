@@ -79,3 +79,7 @@
 # Thank-you page (form confirmation)
 /thank-you.html /thank-you 301
 /thank-you/ /thank-you 301
+
+# Your Privacy Choices page
+/privacy-choices.html /privacy-choices 301
+/privacy-choices/ /privacy-choices 301

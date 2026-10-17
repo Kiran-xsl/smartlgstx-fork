@@ -6,21 +6,47 @@
   'use strict';
 
   // ── First-touch UTM capture (sessionStorage, one write per session) ────────
-  (function () {
-    if (sessionStorage.getItem('sl_ft')) return;
-    var p = new URLSearchParams(window.location.search);
-    sessionStorage.setItem('sl_ft', JSON.stringify({
-      source:   p.get('utm_source')   || '(direct)',
-      medium:   p.get('utm_medium')   || '(none)',
-      campaign: p.get('utm_campaign') || '(none)',
-      landing:  window.location.pathname
-    }));
-  })();
+  // In try: when a browser blocks cookies and site data, sessionStorage throws,
+  // and that must not stop the rest of this script.
+  try {
+    if (!sessionStorage.getItem('sl_ft')) {
+      var p = new URLSearchParams(window.location.search);
+      sessionStorage.setItem('sl_ft', JSON.stringify({
+        source:   p.get('utm_source')   || '(direct)',
+        medium:   p.get('utm_medium')   || '(none)',
+        campaign: p.get('utm_campaign') || '(none)',
+        landing:  window.location.pathname
+      }));
+    }
+  } catch (e) {}
 
   function getFirstTouch() {
     try { return JSON.parse(sessionStorage.getItem('sl_ft') || '{}'); }
     catch (e) { return {}; }
   }
+
+  // ── Your Privacy Choices: is sharing with Meta off right now? ─────────────
+  // Each page's head skips the Meta Pixel when the visitor turned sharing off at
+  // /privacy-choices or the browser sends Global Privacy Control (GPC). A page
+  // that was already open when the visitor opted out stops too: every Meta call
+  // below checks first, and when the tab comes back into view the pixel is told
+  // to stop sending (Meta's consent revoke), which also covers Meta's own
+  // automatic events and the inline Meta calls on the calculator.
+  function sharingOff() {
+    return navigator.globalPrivacyControl === true ||
+      /(?:^|;\s*)sl_privacy=no_share(?:;|$)/.test(document.cookie);
+  }
+  var metaRevoked = false;
+  function stopMetaIfOff() {
+    if (metaRevoked || typeof fbq !== 'function' || !sharingOff()) return;
+    metaRevoked = true;
+    try { fbq('consent', 'revoke'); } catch (e) {}
+  }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) stopMetaIfOff(); });
+  window.addEventListener('focus', stopMetaIfOff);
+  // Before any click or key press reaches the pixel's own listeners
+  window.addEventListener('pointerdown', stopMetaIfOff, true);
+  window.addEventListener('keydown', stopMetaIfOff, true);
 
   // ── Meta Pixel mirror ─────────────────────────────────────────────────────
   // Every event fired below also goes to the Meta Pixel, so Ads Manager can
@@ -41,6 +67,7 @@
   function fireMeta(eventName, extra) {
     var m = META_EVENTS[eventName];
     if (!m || typeof fbq !== 'function') return;
+    if (sharingOff()) { stopMetaIfOff(); return; }
     var params = {};
     META_PARAMS.forEach(function (k) { if (extra && extra[k]) params[k] = extra[k]; });
     if (eventName === 'phone_click') params.contact_method = 'phone';
@@ -175,10 +202,72 @@
   document.addEventListener('focusin', function (e) {
     var f = e.target && e.target.closest && e.target.closest('form[action*="formspree.io"]');
     if (!f || typeof fbq !== 'function') return;
+    if (sharingOff()) { stopMetaIfOff(); return; }
     var id = f.id || 'unnamed_form';
     if (startedForms[id]) return;
     startedForms[id] = true;
     fbq('trackCustom', 'FormStart', { form_id: id });
+  });
+
+  // ── Your Privacy Choices: what visitors see, and what reports and leads carry ──
+  var gpcOn = navigator.globalPrivacyControl === true;
+  if (sharingOff()) {
+    // GA4 gets one meta_pixel_off per session, so reports can show how much
+    // traffic Meta can't see
+    try {
+      if (!sessionStorage.getItem('sl_mpo')) {
+        sessionStorage.setItem('sl_mpo', '1');
+        fire('meta_pixel_off', { reason: gpcOn ? 'gpc' : 'choice' });
+      }
+    } catch (e) {}
+    // California's rules ask the site to show that the opt out was honored, with
+    // "Opt-Out Request Honored" as their example (11 CCR 7025(c)(6), 7026(g)).
+    // The note sits next to the footer link, in the link's own color.
+    var addNote = function () {
+      Array.prototype.forEach.call(document.querySelectorAll('footer a[href="/privacy-choices"]'), function (a) {
+        if (a.parentNode.querySelector('.sl-optout-note')) return;
+        var note = document.createElement('span');
+        note.className = 'sl-optout-note';
+        note.style.whiteSpace = 'nowrap';
+        note.style.color = getComputedStyle(a).color;
+        note.textContent = 'Opt-Out Request Honored';
+        a.parentNode.insertBefore(note, a.nextSibling);
+        // The separator stays outside the no-wrap span so phones can break the line there
+        a.parentNode.insertBefore(document.createTextNode(' \u00a0\u00b7\u00a0 '), note);
+      });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addNote);
+    else addNote();
+  }
+
+  // A visitor who opted out and then sends a form is no longer anonymous, and the
+  // opt out should follow them (11 CCR 7025(c)(1)). The form carries a
+  // privacy_opt_out field so their lead is never uploaded to Meta or another ad
+  // platform. Set in the capture phase, before the page's own submit code runs.
+  function markForm(f) {
+    var input = f.querySelector('input[name="privacy_opt_out"]');
+    if (!sharingOff()) { if (input) input.parentNode.removeChild(input); return; }
+    if (!input) {
+      input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'privacy_opt_out';
+      f.appendChild(input);
+    }
+    input.value = navigator.globalPrivacyControl === true
+      ? 'Yes (Global Privacy Control): do not share this lead with Meta or other ad platforms'
+      : 'Yes (Your Privacy Choices): do not share this lead with Meta or other ad platforms';
+  }
+  document.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (f && f.matches && f.matches('form[action*="formspree.io"]')) markForm(f);
+  }, true);
+  Array.prototype.forEach.call(document.querySelectorAll('form[action*="formspree.io"]'), markForm);
+
+  // The Back button can restore a page with its old scripts still running. If the
+  // visitor turned sharing off in the meantime, reload so the pixel check runs again.
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted && typeof fbq === 'function' &&
+        /(?:^|;\s*)sl_privacy=no_share(?:;|$)/.test(document.cookie)) location.reload();
   });
 
 })();
