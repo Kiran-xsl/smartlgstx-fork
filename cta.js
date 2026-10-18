@@ -124,6 +124,34 @@
       paint();
     }
 
+    // ── Primary buttons: heartbeat + one light sweep when they come on
+    // screen, at most once every 20 seconds per button (styles in cta.css)
+    var PRIMARY = '.sl-nav-book, .sl-bar__book, .sl-c-btn--gold, .sl-mm__talk, a.btn-primary, a.btn-gold, a.bg-gold, a[style*="background:#FADC61"]';
+    var fxEls = document.querySelectorAll(PRIMARY);
+    if (fxEls.length && 'IntersectionObserver' in window) {
+      var lastRun = new WeakMap();
+      var play = function (el) {
+        var now = Date.now();
+        if (now - (lastRun.get(el) || 0) < 20000) return;
+        lastRun.set(el, now);
+        el.classList.remove('sl-cta-play');
+        void el.offsetWidth; // restart the animation
+        el.classList.add('sl-cta-play');
+        setTimeout(function () { el.classList.remove('sl-cta-play'); }, 2700);
+      };
+      var fxIO = new IntersectionObserver(function (es) {
+        es.forEach(function (x) { if (x.isIntersecting && x.intersectionRatio >= 0.9) setTimeout(function () { play(x.target); }, 400); });
+      }, { threshold: [0.9] });
+      fxEls.forEach(function (el) {
+        el.classList.add('sl-cta-fx');
+        var s = document.createElement('span');
+        s.className = 'sl-shine';
+        s.setAttribute('aria-hidden', 'true');
+        el.appendChild(s);
+        fxIO.observe(el);
+      });
+    }
+
     // ── Grouped phone menu: menu button on guide pages, current page marked ─
     document.querySelectorAll('[data-sl-menu-btn]').forEach(function (b) {
       b.addEventListener('click', function () {
