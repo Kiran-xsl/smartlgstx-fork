@@ -138,12 +138,17 @@
     });
   });
 
-  // ── Audit form CTA clicks ─────────────────────────────────────────────────
+  // ── Contact page CTA clicks ───────────────────────────────────────────────
+  // /contact (Talk to Chris) is cta_mode "talk", /contact?intent=write (Contact
+  // Us) is "form", /contact?intent=book is "calendly". Book buttons also open
+  // the popup through slCalendly, so the Calendly listener above already
+  // counted them; skip them here so one click is one event.
   document.addEventListener('click', function (e) {
-    var t = e.target.closest('a[href*="get-your-free-audit"], a[href="/contact"]');
-    if (!t) return;
+    var t = e.target.closest('a[href*="get-your-free-audit"], a[href="/contact"], a[href^="/contact?"]');
+    if (!t || /Calendly/.test(t.getAttribute('onclick') || '')) return;
+    var intent = (/[?&]intent=(\w+)/.exec(t.getAttribute('href')) || [])[1];
     fire('cta_click', {
-      cta_mode: 'form',
+      cta_mode: intent === 'write' ? 'form' : intent === 'book' ? 'calendly' : 'talk',
       cta_location: getLocation(t)
     });
   });
@@ -192,8 +197,10 @@
     if (calendlyLast[ev] && now - calendlyLast[ev] < 2000) return;
     calendlyLast[ev] = now;
     var ft = getFirstTouch();
+    // cta_mode tells a popup someone opened apart from the calendar that
+    // /contact shows inline on load (Talk to Chris on desktop, Book)
     if (ev === 'calendly.event_type_viewed')
-      fire('calendly_opened', { event_category: 'engagement' });
+      fire('calendly_opened', { event_category: 'engagement', cta_mode: window.slCalInline && !document.querySelector('.calendly-overlay') ? 'inline' : 'popup' });
     if (ev === 'calendly.date_and_time_selected')
       fire('calendly_time_selected', { event_category: 'engagement' });
     if (ev === 'calendly.event_scheduled')

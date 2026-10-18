@@ -176,10 +176,11 @@ fbq('track', 'PageView');
 }
 </script>
 <!-- End Meta Pixel Code -->
+    <link rel="stylesheet" href="/cta.css">
 </head>
 <body class="bg-white text-dark">
     <!-- Navigation -->
-    <nav class="bg-navy text-white sticky top-0 z-50">
+    <nav class="sl-site-nav bg-navy text-white sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <a href="/" class="text-2xl font-bold">Smart<span class="text-gold">LGSTX</span></a>
@@ -206,27 +207,47 @@ fbq('track', 'PageView');
                     <a href="/about" class="hover:text-gold transition">About Us</a>
                     <a href="/international-shipping" class="hover:text-gold transition">International Shipping</a>
                     <a href="/blog/" class="hover:text-gold transition">Blog</a>
-                    <a href="/contact" class="bg-gold hover:bg-gold-dark text-navy font-semibold px-6 py-3 rounded-lg transition">Talk to Chris</a>
+                    <span class="sl-nav-cta"><a href="/contact?intent=write" class="sl-nav-contact">Contact Us</a><a href="tel:+18333654789" class="sl-nav-phone" aria-label="Call Chris at 833-365-4789"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg><span class="sl-num">833-365-4789</span></a><a href="/contact?intent=book" onclick="return slCalendly(event)" class="sl-nav-book"><img src="/images/chris-tweedy-headshot-192.webp" alt="" width="34" height="34" decoding="async"><span class="sl-long">Book a 15-Min Call</span><span class="sl-short">Book 15 min</span></a></span>
                 </div>
                 <button class="mobile-menu-btn text-2xl" onclick="document.querySelector('.mobile-menu').classList.toggle('active')">☰</button>
             </div>
         </div>
-        <div class="mobile-menu">
-            <a href="/how-it-works">How It Works</a>
-            <a href="/furniture-shipping-savings">Furniture & Home Goods</a>
-            <a href="/mattress-shipping-savings">Mattress & Bedding</a>
-            <a href="/auto-parts-shipping-savings">Auto Parts</a>
-            <a href="/building-materials-shipping-savings">Building Materials</a>
-            <a href="/fitness-shipping-savings">Fitness Equipment</a>
-            <a href="/food-beverage-shipping-savings">Food & Beverage</a>
-            <a href="/manufacturing-shipping-savings">Manufacturing</a>
-            <a href="/about">About Us</a>
-            <a href="/international-shipping">International Shipping</a>
-                <a href="/dtc-ecommerce-shipping-savings">DTC Ecommerce</a>
-                <a href="/amazon-fba-shipping-savings">Amazon FBA</a>
-                <a href="/apparel-shipping-savings">Apparel</a>
-            <a href="/blog/">Blog</a>
-            <a href="/contact">Talk to Chris</a>
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="sl-mm">
+                <a href="/contact" class="sl-mm__talk" data-cta-location="mobile-menu"><img src="/images/chris-tweedy-headshot-192.webp" alt="" width="44" height="44" loading="lazy" decoding="async"><span><strong>Talk to Chris</strong><small>15+ years at a major carrier</small></span></a>
+                <div class="sl-mm__acts" data-cta-location="mobile-menu">
+                    <a href="/contact?intent=book" onclick="return slCalendly(event)" class="sl-mm__act">Book 15 min</a>
+                    <a href="/contact?intent=write" class="sl-mm__act">Contact Us</a>
+                </div>
+                <a class="sl-mm__row" href="/how-it-works">How It Works</a>
+                <details class="sl-mm__grp"><summary>Industries</summary>
+                    <a href="/dtc-ecommerce-shipping-savings">DTC Ecommerce</a>
+                    <a href="/amazon-fba-shipping-savings">Amazon FBA</a>
+                    <a href="/apparel-shipping-savings">Apparel</a>
+                    <a href="/furniture-shipping-savings">Furniture &amp; Home Goods</a>
+                    <a href="/mattress-shipping-savings">Mattress &amp; Bedding</a>
+                    <a href="/auto-parts-shipping-savings">Auto Parts</a>
+                    <a href="/building-materials-shipping-savings">Building Materials</a>
+                    <a href="/fitness-shipping-savings">Fitness Equipment</a>
+                    <a href="/food-beverage-shipping-savings">Food &amp; Beverage</a>
+                    <a href="/winery-wine-club-shipping-savings">Wineries &amp; Wine Clubs</a>
+                    <a href="/olive-oil-dtc-shipping-savings">Olive Oil &amp; Specialty Food</a>
+                    <a href="/manufacturing-shipping-savings">Manufacturing</a>
+                </details>
+                <a class="sl-mm__row" href="/international-shipping">International Shipping</a>
+                <a class="sl-mm__row" href="/about">About Us</a>
+                <details class="sl-mm__grp"><summary>Resources</summary>
+                    <a href="/blog/">Blog</a>
+                    <a href="/shipping-savings-calculator">Savings Calculator</a>
+                    <a href="/shipping-faq">Shipping FAQ</a>
+                    <a href="/shipping-surcharge-index">Surcharge Index</a>
+                    <a href="/types-of-carrier-surcharges">Types of Surcharges</a>
+                    <a href="/what-is-dimensional-weight">Dimensional Weight Guide</a>
+                    <a href="/how-to-read-ups-invoice">How to Read a UPS Invoice</a>
+                    <a href="/how-carrier-contract-negotiation-works">Contract Negotiation Guide</a>
+                    <a href="/shipping-glossary">Shipping Glossary</a>
+                </details>
+            </div>
         </div>
     </nav>
 
@@ -441,7 +462,7 @@ fbq('track', 'PageView');
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl md:text-3xl font-bold text-navy mb-4">Talk to a Former Carrier Executive for Free</h2>
             <p class="text-navy/80 text-lg mb-8">15 minutes. No pitch. Just a straight answer on whether we can save you money and what categories to target first.</p>
-            <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/smartlgstx/30min_savings_consultation'});return false;" class="inline-block bg-navy hover:bg-navy-light text-white font-bold px-8 py-4 rounded-lg text-lg transition mr-4 mb-4">
+            <a href="/contact?intent=book" onclick="return slCalendly(event)" class="inline-block bg-navy hover:bg-navy-light text-white font-bold px-8 py-4 rounded-lg text-lg transition mr-4 mb-4">
                 Book a 15-Min Call with Chris
             </a>
             <a href="/contact" class="inline-block border-2 border-navy text-navy font-bold px-8 py-4 rounded-lg text-lg transition mb-4 hover:bg-navy/10">
@@ -472,6 +493,7 @@ fbq('track', 'PageView');
                         <li><a href="/about" class="hover:text-gold transition">About Us</a></li>
                         <li><a href="/international-shipping" class="hover:text-gold transition">International Shipping</a></li>
                         <li><a href="/contact" class="hover:text-gold transition">Talk to Chris</a></li>
+                        <li><a href="/contact?intent=write" class="hover:text-gold transition">Contact Us</a></li>
                         <li><a href="/shipping-savings-calculator" class="hover:text-gold transition">Savings Calculator</a></li>
                     </ul>
                 </div>
@@ -493,6 +515,7 @@ fbq('track', 'PageView');
                     <h4 class="font-semibold mb-4">Get Started</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
                         <li><a href="/contact" class="hover:text-gold transition">Talk to Chris</a></li>
+                        <li><a href="/contact?intent=book" onclick="return slCalendly(event)" class="hover:text-gold transition">Book a 15-Min Call</a></li>
                         <li><a href="/shipping-savings-calculator" class="hover:text-gold transition">Calculate Savings</a></li>
                     </ul>
                 </div>
@@ -504,6 +527,7 @@ fbq('track', 'PageView');
     </footer>
     <!-- Calendly widget -->
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script src="/cta.js" defer></script>
     <script src="/attribution.js" defer></script>
 </body>
 </html>
