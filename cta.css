@@ -23,15 +23,16 @@
 .sl-nav-contact { color: inherit; font-size: inherit; }
 .sl-site-nav a, .sl-site-nav .nav-dropdown-trigger { white-space: nowrap; }
 .sl-site-nav .logo, .sl-site-nav .nav-container > a:first-child { flex: none; white-space: nowrap; }
-/* Narrower desktops: tighter spacing, then a shorter Book label, then the
-   number folds into the phone icon (still a tap/click-to-call link) */
-@media (max-width: 1500px) {
-  .sl-site-nav .nav-links { gap: 22px; }
-  .sl-site-nav .space-x-8 > :not([hidden]) ~ :not([hidden]) { margin-left: 22px; }
-  .sl-nav-cta { gap: 14px; }
-  .sl-nav-book .sl-long { display: none; }
-  .sl-nav-book .sl-short { display: inline; }
-}
+/* The nav content box stops growing at 1200 to 1280px however wide the
+   screen is, so the tighter spacing and short Book label apply at every
+   desktop width, not only on narrow screens. Below 1280px the number
+   folds into the phone icon (still a tap/click-to-call link). */
+.sl-site-nav .nav-links { gap: 22px; }
+.sl-site-nav .space-x-8 > :not([hidden]) ~ :not([hidden]) { margin-left: 22px; }
+.sl-site-nav .space-x-8 span, .sl-site-nav .nav-links span { white-space: nowrap; }
+.sl-nav-cta { gap: 14px; }
+.sl-nav-book .sl-long { display: none; }
+.sl-nav-book .sl-short { display: inline; }
 /* Tablets (769 to 1100px): only the Book button, the same footprint as the
    old Talk to Chris button, so the nav still fits on one line */
 @media (min-width: 769px) and (max-width: 1100px) {
