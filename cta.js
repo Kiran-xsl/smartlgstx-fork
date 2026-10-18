@@ -49,6 +49,35 @@
     return false;
   };
 
+  // ── Microsoft Clarity (heatmaps, scroll depth, session recordings) ──────
+  // Not loaded for visitors who turned sharing off at /privacy-choices or whose
+  // browser sends Global Privacy Control, because Clarity also sets Microsoft
+  // cookies (MUID) that Microsoft uses for advertising. A visitor who opts out
+  // while a page is open is switched to Clarity's no-cookie mode (consentv2
+  // denied), which deletes its cookies and ends the session. Form fields are
+  // masked by Clarity in every masking mode.
+  var CLARITY_ID = 'yze1mxnxfv';
+  function sharingOff() {
+    return navigator.globalPrivacyControl === true ||
+      /(?:^|;\s*)sl_privacy=no_share(?:;|$)/.test(document.cookie);
+  }
+  if (/^[a-z0-9]{6,16}$/.test(CLARITY_ID) && !sharingOff()) {
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CLARITY_ID);
+    var clarityOff = false;
+    var stopClarityIfOff = function () {
+      if (clarityOff || !sharingOff() || typeof window.clarity !== 'function') return;
+      clarityOff = true;
+      try { window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'denied' }); } catch (e) {}
+    };
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) stopClarityIfOff(); });
+    window.addEventListener('focus', stopClarityIfOff);
+    window.addEventListener('pointerdown', stopClarityIfOff, true);
+  }
+
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
@@ -95,6 +124,34 @@
       paint();
     }
 
+    // ── Primary buttons: heartbeat + one light sweep when they come on
+    // screen, at most once every 20 seconds per button (styles in cta.css)
+    var PRIMARY = '.sl-nav-book, .sl-bar__book, .sl-c-btn--gold, .sl-mm__talk, a.btn-primary, a.btn-gold, a.bg-gold, a[style*="background:#FADC61"]';
+    var fxEls = document.querySelectorAll(PRIMARY);
+    if (fxEls.length && 'IntersectionObserver' in window) {
+      var lastRun = new WeakMap();
+      var play = function (el) {
+        var now = Date.now();
+        if (now - (lastRun.get(el) || 0) < 20000) return;
+        lastRun.set(el, now);
+        el.classList.remove('sl-cta-play');
+        void el.offsetWidth; // restart the animation
+        el.classList.add('sl-cta-play');
+        setTimeout(function () { el.classList.remove('sl-cta-play'); }, 2700);
+      };
+      var fxIO = new IntersectionObserver(function (es) {
+        es.forEach(function (x) { if (x.isIntersecting && x.intersectionRatio >= 0.9) setTimeout(function () { play(x.target); }, 400); });
+      }, { threshold: [0.9] });
+      fxEls.forEach(function (el) {
+        el.classList.add('sl-cta-fx');
+        var s = document.createElement('span');
+        s.className = 'sl-shine';
+        s.setAttribute('aria-hidden', 'true');
+        el.appendChild(s);
+        fxIO.observe(el);
+      });
+    }
+
     // ── Grouped phone menu: menu button on guide pages, current page marked ─
     document.querySelectorAll('[data-sl-menu-btn]').forEach(function (b) {
       b.addEventListener('click', function () {
@@ -105,10 +162,10 @@
         b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       });
     });
-    var here = location.pathname.replace(/\/$/, '') || '/';
+    var here = (location.pathname.replace(/\/$/, '') || '/') + location.search;
     document.querySelectorAll('.sl-mm a[href^="/"]').forEach(function (a) {
-      var h = a.getAttribute('href').split('?')[0].replace(/\/$/, '') || '/';
-      if (h !== here || a.classList.contains('sl-mm__act')) return;
+      var h = a.getAttribute('href').replace(/\/(\?|$)/, '$1') || '/';
+      if (h !== here || a.classList.contains('sl-mm__talk')) return;
       a.setAttribute('aria-current', 'page');
       var g = a.closest('details');
       if (g) g.open = true;
