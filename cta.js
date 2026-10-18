@@ -49,6 +49,35 @@
     return false;
   };
 
+  // ── Microsoft Clarity (heatmaps, scroll depth, session recordings) ──────
+  // Not loaded for visitors who turned sharing off at /privacy-choices or whose
+  // browser sends Global Privacy Control, because Clarity also sets Microsoft
+  // cookies (MUID) that Microsoft uses for advertising. A visitor who opts out
+  // while a page is open is switched to Clarity's no-cookie mode (consentv2
+  // denied), which deletes its cookies and ends the session. Form fields are
+  // masked by Clarity in every masking mode.
+  var CLARITY_ID = 'yze1mxnxfv';
+  function sharingOff() {
+    return navigator.globalPrivacyControl === true ||
+      /(?:^|;\s*)sl_privacy=no_share(?:;|$)/.test(document.cookie);
+  }
+  if (/^[a-z0-9]{6,16}$/.test(CLARITY_ID) && !sharingOff()) {
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', CLARITY_ID);
+    var clarityOff = false;
+    var stopClarityIfOff = function () {
+      if (clarityOff || !sharingOff() || typeof window.clarity !== 'function') return;
+      clarityOff = true;
+      try { window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'denied' }); } catch (e) {}
+    };
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) stopClarityIfOff(); });
+    window.addEventListener('focus', stopClarityIfOff);
+    window.addEventListener('pointerdown', stopClarityIfOff, true);
+  }
+
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
