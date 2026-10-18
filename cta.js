@@ -162,10 +162,10 @@
         b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       });
     });
-    var here = location.pathname.replace(/\/$/, '') || '/';
+    var here = (location.pathname.replace(/\/$/, '') || '/') + location.search;
     document.querySelectorAll('.sl-mm a[href^="/"]').forEach(function (a) {
-      var h = a.getAttribute('href').split('?')[0].replace(/\/$/, '') || '/';
-      if (h !== here || a.classList.contains('sl-mm__act')) return;
+      var h = a.getAttribute('href').replace(/\/(\?|$)/, '$1') || '/';
+      if (h !== here || a.classList.contains('sl-mm__talk')) return;
       a.setAttribute('aria-current', 'page');
       var g = a.closest('details');
       if (g) g.open = true;

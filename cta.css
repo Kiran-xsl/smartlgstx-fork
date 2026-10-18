@@ -98,7 +98,7 @@
 .mobile-menu .sl-mm a { border: 0; text-decoration: none; }
 .sl-mm__acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 4px 0 14px; border-bottom: 1px solid rgba(255,255,255,.12); margin-bottom: 4px; }
 .mobile-menu .sl-mm a.sl-mm__act { display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 6px 4px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,.35); color: #fff; font-weight: 700; font-size: .9rem; text-align: center; text-decoration: none; }
-.mobile-menu .sl-mm a.sl-mm__talk { display: flex; align-items: center; gap: 12px; margin: 12px 0 10px; padding: 8px 14px 8px 8px; min-height: 60px; border-radius: 999px; background: #FADC61; color: #001850; text-decoration: none; }
+.mobile-menu .sl-mm a.sl-mm__talk { display: flex; align-items: center; gap: 12px; margin: 12px 0 14px; padding: 8px 14px 8px 8px; min-height: 60px; border-radius: 999px; background: #FADC61; color: #001850; text-decoration: none; }
 .mobile-menu .sl-mm a.sl-mm__talk img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex: none; border: 2px solid #fff; }
 .sl-mm__talk strong { display: block; font-size: 1.1rem; font-weight: 800; line-height: 1.2; }
 .sl-mm__talk small { display: block; font-size: .8rem; font-weight: 500; color: #1e3a6e; }
