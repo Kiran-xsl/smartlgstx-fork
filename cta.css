@@ -112,8 +112,8 @@
 .mobile-menu .sl-mm a[aria-current="page"] { color: #FADC61; }
 .mobile-menu .sl-mm a:focus-visible, .sl-mm__grp > summary:focus-visible { outline: 2px solid #FADC61; outline-offset: 2px; }
 
-/* Primary (yellow) buttons: two slow heartbeats with a pause between, and
-   one light sweep, when the button comes on screen, then still. The first
+/* Primary (yellow) buttons: two slow heartbeats with a pause between, each
+   with a light sweep, when the button comes on screen, then still. The first
    run waits until 1.5s after page load (cta.js). Each run lasts 4.8s, under
    the 5s limit for motion that starts on its own (WCAG 2.2.2). Soft glow on
    hover and keyboard focus. No motion at all for visitors whose device asks
@@ -125,7 +125,7 @@
   transform: skewX(-18deg); opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .sl-cta-fx.sl-cta-play { animation: sl-heartbeat 4.8s ease-in-out 1; }
-  .sl-cta-fx.sl-cta-play .sl-shine { animation: sl-shine 1.8s ease-out .4s 1; }
+  .sl-cta-fx.sl-cta-play .sl-shine { animation: sl-shine 4.8s ease-out 1; }
 }
 /* Beat one 0 to 33% (about 1.6s), rest to 55% (about 1s), beat two 55 to 88% */
 @keyframes sl-heartbeat {
@@ -134,8 +134,11 @@
   14%, 69% { transform: scale(1); }
   21%, 76% { transform: scale(1.025); }
 }
+/* One sweep per beat: 8 to 45% rides beat one, 63 to 100% rides beat two */
 @keyframes sl-shine {
-  0% { left: -60%; opacity: 0; }
-  15% { opacity: 1; }
+  0%, 8% { left: -60%; opacity: 0; }
+  13.5%, 68.5% { opacity: 1; }
+  45% { left: 120%; opacity: 0; }
+  45.1%, 63% { left: -60%; opacity: 0; }
   100% { left: 120%; opacity: 0; }
 }
