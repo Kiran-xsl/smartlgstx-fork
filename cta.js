@@ -130,17 +130,31 @@
     var fxEls = document.querySelectorAll(PRIMARY);
     if (fxEls.length && 'IntersectionObserver' in window) {
       var lastRun = new WeakMap();
+      var onScreen = new WeakMap();
+      // Nothing plays until 1.5s after the page has finished loading, so the
+      // first beat lands once the visitor has settled, not during the load
+      var readyAt = 0;
+      var setReady = function () { readyAt = Date.now() + 1500; };
+      if (document.readyState === 'complete') setReady(); else window.addEventListener('load', setReady);
       var play = function (el) {
         var now = Date.now();
-        if (now - (lastRun.get(el) || 0) < 20000) return;
+        if (!onScreen.get(el) || now - (lastRun.get(el) || 0) < 20000) return;
         lastRun.set(el, now);
         el.classList.remove('sl-cta-play');
         void el.offsetWidth; // restart the animation
         el.classList.add('sl-cta-play');
-        setTimeout(function () { el.classList.remove('sl-cta-play'); }, 3300);
+        setTimeout(function () { el.classList.remove('sl-cta-play'); }, 5000);
+      };
+      var later = function (el) {
+        if (!readyAt) { window.addEventListener('load', function () { later(el); }); return; }
+        setTimeout(function () { play(el); }, Math.max(400, readyAt - Date.now()));
       };
       var fxIO = new IntersectionObserver(function (es) {
-        es.forEach(function (x) { if (x.isIntersecting && x.intersectionRatio >= 0.9) setTimeout(function () { play(x.target); }, 400); });
+        es.forEach(function (x) {
+          var vis = x.isIntersecting && x.intersectionRatio >= 0.9;
+          onScreen.set(x.target, vis);
+          if (vis) later(x.target);
+        });
       }, { threshold: [0.9] });
       fxEls.forEach(function (el) {
         el.classList.add('sl-cta-fx');

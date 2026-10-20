@@ -112,25 +112,27 @@
 .mobile-menu .sl-mm a[aria-current="page"] { color: #FADC61; }
 .mobile-menu .sl-mm a:focus-visible, .sl-mm__grp > summary:focus-visible { outline: 2px solid #FADC61; outline-offset: 2px; }
 
-/* Primary (yellow) buttons: a short heartbeat and one light sweep when the
-   button comes on screen, then still. Each run lasts about 3.2s, so nothing
-   keeps moving (WCAG 2.2.2). Soft glow on hover and keyboard focus.
-   No motion at all for visitors whose device asks for reduced motion. */
+/* Primary (yellow) buttons: two slow heartbeats with a pause between, and
+   one light sweep, when the button comes on screen, then still. The first
+   run waits until 1.5s after page load (cta.js). Each run lasts 4.8s, under
+   the 5s limit for motion that starts on its own (WCAG 2.2.2). Soft glow on
+   hover and keyboard focus. No motion at all for visitors whose device asks
+   for reduced motion. */
 .sl-cta-fx { position: relative; overflow: hidden; isolation: isolate; transition: box-shadow .25s ease, transform .25s ease; }
 .sl-cta-fx:hover, .sl-cta-fx:focus-visible { box-shadow: 0 0 0 3px rgba(250,220,97,.28), 0 6px 22px rgba(250,220,97,.38); }
 .sl-shine { position: absolute; top: 0; bottom: 0; left: -60%; width: 45%; pointer-events: none; z-index: 1;
   background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 100%);
   transform: skewX(-18deg); opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .sl-cta-fx.sl-cta-play { animation: sl-heartbeat 1.6s ease-in-out 2; }
-  .sl-cta-fx.sl-cta-play .sl-shine { animation: sl-shine 1.25s ease-out .6s 1; }
+  .sl-cta-fx.sl-cta-play { animation: sl-heartbeat 4.8s ease-in-out 1; }
+  .sl-cta-fx.sl-cta-play .sl-shine { animation: sl-shine 1.8s ease-out .4s 1; }
 }
+/* Beat one 0 to 33% (about 1.6s), rest to 55% (about 1s), beat two 55 to 88% */
 @keyframes sl-heartbeat {
-  0%, 100% { transform: scale(1); }
-  14% { transform: scale(1.04); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.025); }
-  70% { transform: scale(1); }
+  0%, 33%, 55%, 88%, 100% { transform: scale(1); }
+  7%, 62% { transform: scale(1.04); }
+  14%, 69% { transform: scale(1); }
+  21%, 76% { transform: scale(1.025); }
 }
 @keyframes sl-shine {
   0% { left: -60%; opacity: 0; }
