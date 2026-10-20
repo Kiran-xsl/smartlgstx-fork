@@ -137,7 +137,7 @@
         el.classList.remove('sl-cta-play');
         void el.offsetWidth; // restart the animation
         el.classList.add('sl-cta-play');
-        setTimeout(function () { el.classList.remove('sl-cta-play'); }, 2700);
+        setTimeout(function () { el.classList.remove('sl-cta-play'); }, 3300);
       };
       var fxIO = new IntersectionObserver(function (es) {
         es.forEach(function (x) { if (x.isIntersecting && x.intersectionRatio >= 0.9) setTimeout(function () { play(x.target); }, 400); });

@@ -113,7 +113,7 @@
 .mobile-menu .sl-mm a:focus-visible, .sl-mm__grp > summary:focus-visible { outline: 2px solid #FADC61; outline-offset: 2px; }
 
 /* Primary (yellow) buttons: a short heartbeat and one light sweep when the
-   button comes on screen, then still. Each run lasts about 2.5s, so nothing
+   button comes on screen, then still. Each run lasts about 3.2s, so nothing
    keeps moving (WCAG 2.2.2). Soft glow on hover and keyboard focus.
    No motion at all for visitors whose device asks for reduced motion. */
 .sl-cta-fx { position: relative; overflow: hidden; isolation: isolate; transition: box-shadow .25s ease, transform .25s ease; }
@@ -122,8 +122,8 @@
   background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 100%);
   transform: skewX(-18deg); opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .sl-cta-fx.sl-cta-play { animation: sl-heartbeat 1.3s ease-in-out 2; }
-  .sl-cta-fx.sl-cta-play .sl-shine { animation: sl-shine 1s ease-out .5s 1; }
+  .sl-cta-fx.sl-cta-play { animation: sl-heartbeat 1.6s ease-in-out 2; }
+  .sl-cta-fx.sl-cta-play .sl-shine { animation: sl-shine 1.25s ease-out .6s 1; }
 }
 @keyframes sl-heartbeat {
   0%, 100% { transform: scale(1); }
