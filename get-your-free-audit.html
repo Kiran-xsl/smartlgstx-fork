@@ -242,6 +242,9 @@ fbq('track', 'PageView');
         .sl-a-btn--gold:hover { background: #e8c94a; }
         .sl-a-btn--navy { background: #001850; color: #fff; }
         .sl-a-btn--navy:hover { background: #0a2a6e; }
+        #auditForm select { background-color: #fff; }
+        /* placeholder text darker for contrast (4.5:1) */
+        #auditForm input::placeholder, #auditForm textarea::placeholder { color: #6b7280 !important; }
         .sl-a-bullets { list-style: none; margin: 0 0 20px; padding: 0; color: #334155; }
         .sl-a-bullets li { padding-left: 26px; position: relative; margin: 0 0 8px; }
         .sl-a-bullets li::before { content: ""; position: absolute; left: 4px; top: 7px; width: 7px; height: 12px; border: solid #0f7a3d; border-width: 0 3px 3px 0; transform: rotate(45deg) scale(.8); }
@@ -345,13 +348,13 @@ fbq('track', 'PageView');
     <section class="bg-gray-50 sl-a-main">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="sl-a-card sl-a-form" id="b-form" data-cta-location="audit-form">
+            <div class="sl-a-card sl-a-form" id="b-form" data-sl-own-ctas data-cta-location="audit-form">
                 <h2 class="sl-a-h2">Request your free audit</h2>
                 <p class="sl-a-p">Takes about a minute. Chris replies within 24 hours.</p>
                 <ul class="sl-a-bullets">
                     <li>See which surcharges and contract terms leave room to save</li>
                     <li>Paid only if we recover money for you</li>
-                    <li>No files or logins needed to start</li>
+                    <li>Answer a few questions and Chris takes it from there</li>
                 </ul>
                 <form action="https://formspree.io/f/mbdzvzkb" method="POST" class="space-y-4" id="auditForm">
                     <input type="hidden" name="_subject" value="New Free Audit Request - Smart LGSTX">
@@ -377,7 +380,7 @@ fbq('track', 'PageView');
                         <input id="f_company" type="text" name="company" required autocomplete="organization" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-gold" placeholder="Your company">
                     </div>
                     <div>
-                        <label for="f_spend" class="block text-sm font-medium text-gray-700 mb-1">Roughly how much do you spend on parcel shipping a year?</label>
+                        <label for="f_spend" class="block text-sm font-medium text-gray-700 mb-1">Roughly how much do you spend on parcel shipping a year? <span class="text-gray-500">(optional)</span></label>
                         <select id="f_spend" name="annual_spend" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-gold">
                             <option value="">Select a range</option>
                             <option value="Under $100K">Under $100K</option>
@@ -387,7 +390,7 @@ fbq('track', 'PageView');
                         </select>
                     </div>
                     <div>
-                        <label for="f_role" class="block text-sm font-medium text-gray-700 mb-1">What is your role?</label>
+                        <label for="f_role" class="block text-sm font-medium text-gray-700 mb-1">What is your role? <span class="text-gray-500">(optional)</span></label>
                         <select id="f_role" name="role" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-gold">
                             <option value="">Select a role</option>
                             <option value="Owner or founder">Owner or founder</option>
