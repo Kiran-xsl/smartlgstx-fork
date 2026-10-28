@@ -7,3 +7,4 @@ wrangler.toml
 wrangler.jsonc
 README.md
 node_modules
+tools
