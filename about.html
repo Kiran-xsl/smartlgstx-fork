@@ -10,9 +10,11 @@
       gtag('config', 'G-8GPCHX087K');
     </script>
     <meta charset="UTF-8">
+    <style>:root{--sl-hero:url(/images/hero/about-us-hero-1600.webp)}@media(max-width:767px){:root{--sl-hero:url(/images/hero/about-us-hero-800.webp)}}</style>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" as="image" href="/images/hero/about-us-hero-800.webp" media="(max-width:767px)" fetchpriority="high"><link rel="preload" as="image" href="/images/hero/about-us-hero-1600.webp" media="(min-width:768px)" fetchpriority="high">
     <title>About Us | Smart LGSTX | 50+ Years on the Carrier Side</title>
     <link rel="canonical" href="https://www.smartlgstx.com/about" />
     <meta name="robots" content="index, follow" />
@@ -273,7 +275,7 @@ fbq('track', 'PageView');
 </nav>
 
     <!-- Hero -->
-    <section class="relative text-white py-16 md:py-24 overflow-hidden" style="background: url('images/About Us Hero.jpg') center right / cover no-repeat;">
+    <section class="relative text-white py-16 md:py-24 overflow-hidden" style="background: var(--sl-hero) center right / cover no-repeat;">
         <div class="absolute inset-0" style="background: linear-gradient(90deg, #001850 0%, #001850 35%, rgba(0,24,80,0.85) 55%, rgba(0,24,80,0.6) 75%, rgba(0,24,80,0.4) 100%);"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">The Person Negotiating For You Used to Be the Person Negotiating Against You.</h1>
