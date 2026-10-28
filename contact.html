@@ -103,9 +103,7 @@
             }
         }
     </style>
-    <!-- Calendly widget -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <!-- Calendly loads on demand: /cta.js for the popup, the inline calendar script below -->
 
 <script type="application/ld+json">
 {
@@ -551,6 +549,16 @@ fbq('track', 'PageView');
             if (!(intent === 'book' || (intent === 'talk' && wide))) return;
             var mount = document.getElementById('sl-cal-mount'), tries = 0;
             window.slCalInline = true;
+            if (!window.Calendly) {
+                var l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = 'https://assets.calendly.com/assets/external/widget.css';
+                document.head.appendChild(l);
+                var sc = document.createElement('script');
+                sc.src = 'https://assets.calendly.com/assets/external/widget.js';
+                sc.async = true;
+                document.head.appendChild(sc);
+            }
             (function go() {
                 if (window.Calendly && window.Calendly.initInlineWidget) {
                     mount.innerHTML = '';
