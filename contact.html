@@ -558,9 +558,10 @@ fbq('track', 'PageView');
                 var sc = document.createElement('script');
                 sc.src = 'https://assets.calendly.com/assets/external/widget.js';
                 sc.async = true;
+                sc.onload = function () { tries = 0; go(); };
                 document.head.appendChild(sc);
             }
-            (function go() {
+            function go() {
                 if (window.Calendly && window.Calendly.initInlineWidget) {
                     mount.innerHTML = '';
                     mount.style.height = wide ? '700px' : '1000px';
@@ -569,7 +570,8 @@ fbq('track', 'PageView');
                         parentElement: mount
                     });
                 } else if (++tries < 60) { setTimeout(go, 100); }
-            })();
+            }
+            go();
         })();
 
         // UTM Tracking. In try: when a browser blocks site data, sessionStorage throws,
