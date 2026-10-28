@@ -548,7 +548,7 @@ fbq('track', 'PageView');
             if (f) f.value = intent;
             var wide = window.matchMedia('(min-width: 769px)').matches;
             if (!(intent === 'book' || (intent === 'talk' && wide))) return;
-            var mount = document.getElementById('sl-cal-mount'), tries = 0;
+            var mount = document.getElementById('sl-cal-mount'), tries = 0, inited = false;
             window.slCalInline = true;
             if (!window.Calendly) {
                 var l = document.createElement('link');
@@ -562,7 +562,9 @@ fbq('track', 'PageView');
                 document.head.appendChild(sc);
             }
             function go() {
+                if (inited) return;
                 if (window.Calendly && window.Calendly.initInlineWidget) {
+                    inited = true;
                     mount.innerHTML = '';
                     mount.style.height = wide ? '700px' : '1000px';
                     window.Calendly.initInlineWidget({
