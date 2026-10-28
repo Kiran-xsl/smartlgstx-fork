@@ -13,3 +13,6 @@
   Set-Cookie: sl_privacy=no_share; Max-Age=34560000; Path=/; Secure; SameSite=Lax
   Cache-Control: no-store
   X-Robots-Tag: noindex
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
