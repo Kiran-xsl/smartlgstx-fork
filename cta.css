@@ -112,33 +112,52 @@
 .mobile-menu .sl-mm a[aria-current="page"] { color: #FADC61; }
 .mobile-menu .sl-mm a:focus-visible, .sl-mm__grp > summary:focus-visible { outline: 2px solid #FADC61; outline-offset: 2px; }
 
-/* Primary (yellow) buttons: two slow heartbeats with a pause between, each
-   with a light sweep, when the button comes on screen, then still. The first
-   run waits until 1.5s after page load (cta.js). Each run lasts 4.8s, under
-   the 5s limit for motion that starts on its own (WCAG 2.2.2). Soft glow on
-   hover and keyboard focus. No motion at all for visitors whose device asks
-   for reduced motion. */
+/* Primary (yellow) buttons: four different treatments so the page does not
+   pulse in one rhythm. cta.js gives each button one of them
+   (sl-fx-bounce, sl-fx-heart, sl-fx-glow, sl-fx-shine) and plays it once when
+   the button comes on screen, then it is still. Every run is under 5s (WCAG
+   2.2.2). Soft glow on hover and keyboard focus. No motion at all for
+   visitors whose device asks for reduced motion.
+   TUNE HERE: each treatment has a duration and a strength. The pause between
+   runs is COOLDOWN_MS in cta.js. */
+:root {
+  --sl-bounce-dur: 1.2s;  --sl-bounce-rise: 8px;
+  --sl-heart-dur: 1.1s;   --sl-heart-grow: 1.06;
+  --sl-glow-dur: 1.8s;    --sl-glow-ring: 14px;
+  --sl-shine-dur: 1s;     --sl-shine-alpha: .75;
+}
 .sl-cta-fx { position: relative; overflow: hidden; isolation: isolate; transition: box-shadow .25s ease, transform .25s ease; }
 .sl-cta-fx:hover, .sl-cta-fx:focus-visible { box-shadow: 0 0 0 3px rgba(250,220,97,.28), 0 6px 22px rgba(250,220,97,.38); }
 .sl-shine { position: absolute; top: 0; bottom: 0; left: -60%; width: 45%; pointer-events: none; z-index: 1;
-  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(105deg, rgba(255,255,255,0) 0%, rgba(255,255,255,var(--sl-shine-alpha)) 50%, rgba(255,255,255,0) 100%);
   transform: skewX(-18deg); opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .sl-cta-fx.sl-cta-play { animation: sl-heartbeat 4.8s ease-in-out 1; }
-  .sl-cta-fx.sl-cta-play .sl-shine { animation: sl-shine 4.8s ease-out 1; }
+  .sl-cta-fx.sl-fx-bounce.sl-cta-play { animation: sl-bounce var(--sl-bounce-dur) ease-in-out 1; }
+  .sl-cta-fx.sl-fx-heart.sl-cta-play  { animation: sl-heart var(--sl-heart-dur) ease-in-out 1; }
+  .sl-cta-fx.sl-fx-glow.sl-cta-play   { animation: sl-glow var(--sl-glow-dur) ease-out 1; }
+  .sl-cta-fx.sl-fx-shine.sl-cta-play .sl-shine { animation: sl-shine var(--sl-shine-dur) ease-out 1; }
 }
-/* Beat one 0 to 33% (about 1.6s), rest to 55% (about 1s), beat two 55 to 88% */
-@keyframes sl-heartbeat {
-  0%, 33%, 55%, 88%, 100% { transform: scale(1); }
-  7%, 62% { transform: scale(1.04); }
-  14%, 69% { transform: scale(1); }
-  21%, 76% { transform: scale(1.025); }
+/* One soft hop, then a small settle */
+@keyframes sl-bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(calc(var(--sl-bounce-rise) * -1)); }
+  60% { transform: translateY(0); }
+  80% { transform: translateY(calc(var(--sl-bounce-rise) * -.35)); }
 }
-/* One sweep per beat: 8 to 45% rides beat one, 63 to 100% rides beat two */
+/* Lub-dub: a full beat, then a smaller second one */
+@keyframes sl-heart {
+  0%, 32%, 100% { transform: scale(1); }
+  18% { transform: scale(var(--sl-heart-grow)); }
+  50% { transform: scale(calc(1 + (var(--sl-heart-grow) - 1) * .65)); }
+  70% { transform: scale(1); }
+}
+/* Gold ring that spreads out and fades */
+@keyframes sl-glow {
+  0% { box-shadow: 0 0 0 0 rgba(250,220,97,.65); }
+  100% { box-shadow: 0 0 0 var(--sl-glow-ring) rgba(250,220,97,0); }
+}
+/* A light streak crosses the button once */
 @keyframes sl-shine {
-  0%, 8% { left: -60%; opacity: 0; }
-  13.5%, 68.5% { opacity: 1; }
-  45% { left: 120%; opacity: 0; }
-  45.1%, 63% { left: -60%; opacity: 0; }
-  100% { left: 120%; opacity: 0; }
+  0% { left: -60%; opacity: 1; }
+  100% { left: 120%; opacity: 1; }
 }
