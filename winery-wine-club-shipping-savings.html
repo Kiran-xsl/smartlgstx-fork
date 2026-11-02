@@ -7,7 +7,22 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-8GPCHX087K');
+      // Team, test and automated visits carry traffic_type, so GA4's data filters
+      // can drop them: visit any page once with ?sl_internal=1 to mark a browser as
+      // team (?sl_internal=0 undoes it); visits opened from Meta Events Manager count
+      // as internal for that tab; headless browsers report navigator.webdriver.
+      (function () {
+        var t = '';
+        try {
+          var q = location.search, c = 'sl_internal=1; path=/; max-age=31536000; SameSite=Lax';
+          if (/[?&]sl_internal=1(?:&|$)/.test(q)) document.cookie = c;
+          if (/[?&]sl_internal=0(?:&|$)/.test(q)) document.cookie = 'sl_internal=; path=/; max-age=0; SameSite=Lax';
+          if (/^https:\/\/eventsmanager\.facebook\.com\//.test(document.referrer)) sessionStorage.setItem('sl_internal', '1');
+          if (/(?:^|;\s*)sl_internal=1(?:;|$)/.test(document.cookie) || sessionStorage.getItem('sl_internal') === '1') t = 'internal';
+          else if (navigator.webdriver === true) t = 'bot';
+        } catch (e) {}
+        gtag('config', 'G-8GPCHX087K', t ? { traffic_type: t } : {});
+      })();
     </script>
   <meta charset="UTF-8">
     <style>:root{--sl-hero:url(/images/hero/wine-1600.webp)}@media(max-width:767px){:root{--sl-hero:url(/images/hero/wine-800.webp)}}</style>
