@@ -112,6 +112,7 @@
     if (!t) return;
     fire('phone_click', {
       event_category: 'contact',
+      cta_mode: 'call',
       cta_location: t.dataset.ctaLocation || getLocation(t)
     });
   });
@@ -124,6 +125,7 @@
     if (!t) return;
     fire('email_click', {
       event_category: 'contact',
+      cta_mode: 'email',
       cta_location: t.dataset.ctaLocation || getLocation(t)
     });
   });
@@ -215,19 +217,38 @@
       });
   });
 
-  // ── Form starts (Meta only) ───────────────────────────────────────────────
-  // GA4 already records form_start through Enhanced Measurement. Meta gets one
-  // FormStart per form per page view, so starts can be compared with leads.
+  // ── Form starts and submits (GA4 and Meta) ───────────────────────────────
+  // GA4 Enhanced Measurement never recorded these here: 0 form_start and 0
+  // form_submit on the whole property Oct 19 to Nov 1, 2026, while a confirmed
+  // lead came through. Both forms post with fetch, so they are sent here instead.
+  // form_start: the first time someone focuses a field, once per form per page
+  // view. form_submit: each press of Send that the browser accepts (required
+  // fields filled), counted before Formspree answers. generate_lead stays the
+  // confirmed count; starts minus leads is abandonment. Only the form's id and
+  // the page go out, never what was typed.
+  function formOf(el) {
+    return el && el.closest && el.closest('form[action*="formspree.io"]');
+  }
   var startedForms = {};
   document.addEventListener('focusin', function (e) {
-    var f = e.target && e.target.closest && e.target.closest('form[action*="formspree.io"]');
-    if (!f || typeof fbq !== 'function') return;
-    if (sharingOff()) { stopMetaIfOff(); return; }
+    // A field, not the Send button: pressing Send on an empty form is not a start
+    if (!e.target.matches || !e.target.matches('input, select, textarea')) return;
+    var f = formOf(e.target);
+    if (!f) return;
     var id = f.id || 'unnamed_form';
     if (startedForms[id]) return;
     startedForms[id] = true;
+    if (typeof gtag === 'function') gtag('event', 'form_start', { form_id: id, form_destination: 'formspree', page: window.location.pathname });
+    if (typeof fbq !== 'function') return;
+    if (sharingOff()) { stopMetaIfOff(); return; }
     fbq('trackCustom', 'FormStart', { form_id: id });
   });
+  // Capture phase, so it runs before the page's own handler stops the post
+  document.addEventListener('submit', function (e) {
+    var f = formOf(e.target);
+    if (!f || typeof gtag !== 'function') return;
+    gtag('event', 'form_submit', { form_id: f.id || 'unnamed_form', form_destination: 'formspree', page: window.location.pathname });
+  }, true);
 
   // ── Your Privacy Choices: what visitors see, and what reports and leads carry ──
   var gpcOn = navigator.globalPrivacyControl === true;
