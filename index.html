@@ -1295,52 +1295,6 @@ fbq('track', 'PageView');
         </div>
     </section>
 
-    <!-- Chris Why Panel -->
-    <style>
-        .cw-panel { background:#fff; padding:80px 24px; overflow:hidden; }
-        .cw-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:48px; align-items:center; }
-        .cw-visual { --cw-photo:400px; order:2; position:relative; width:calc(var(--cw-photo) * 1.4); height:calc(var(--cw-photo) * 1.4); }
-        .cw-visual picture { position:absolute; top:50%; left:50%; width:var(--cw-photo); height:var(--cw-photo); transform:translate(-50%,-50%); display:block; }
-        .cw-img { display:block; width:100%; height:100%; object-fit:cover; -webkit-mask-image:radial-gradient(circle closest-side,#000 80%,transparent 99%); mask-image:radial-gradient(circle closest-side,#000 80%,transparent 99%); }
-        .cw-ring { position:absolute; top:50%; left:50%; width:calc(var(--cw-photo) * 1.14); height:calc(var(--cw-photo) * 1.14); border:14px solid var(--gold); border-radius:50%; transform:translate(-50%,-50%); filter:url(#cw-spray); pointer-events:none; -webkit-mask-image:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 155deg,#000 220deg,#000 310deg,transparent 360deg); mask-image:conic-gradient(from 0deg at 50% 50%,transparent 0deg,transparent 155deg,#000 220deg,#000 310deg,transparent 360deg); }
-        .cw-quote { margin:0; color:var(--navy); }
-        .cw-quote p { margin:0 0 24px; font-size:clamp(1.5rem,2.6vw,2.1rem); line-height:1.3; font-weight:800; letter-spacing:-0.01em; }
-        .cw-quote p::before { content:"\201C"; }
-        .cw-quote p::after { content:"\201D"; }
-        .cw-quote footer { font-size:1rem; font-weight:600; color:var(--slate); }
-        .cw-quote footer span { display:block; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); margin-bottom:6px; }
-        @media (max-width:860px) {
-            .cw-panel { padding:56px 20px; }
-            .cw-inner { grid-template-columns:1fr; gap:8px; justify-items:center; text-align:center; }
-            .cw-visual { --cw-photo:260px; order:0; }
-            .cw-ring { border-width:9px; }
-        }
-    </style>
-    <section class="cw-panel" aria-labelledby="cw-quote-text">
-        <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-            <defs>
-                <filter id="cw-spray" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11" result="noise"/>
-                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" result="rough"/>
-                    <feGaussianBlur in="rough" stdDeviation="1.1" result="soft"/>
-                    <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3 -0.9" result="grain"/>
-                    <feComposite in="soft" in2="grain" operator="in" result="speckle"/>
-                    <feMerge><feMergeNode in="soft"/><feMergeNode in="speckle"/></feMerge>
-                </filter>
-            </defs>
-        </svg>
-        <div class="cw-inner">
-            <div class="cw-visual">
-                <picture><source type="image/webp" srcset="/images/chris-tweedy-headshot-400.webp 400w, /images/chris-tweedy-headshot-800.webp 800w" sizes="(max-width: 860px) 260px, 400px"><img class="cw-img" src="/images/chris-tweedy-headshot-800.jpg" alt="Chris Tweedy, founder and CEO of Smart LGSTX" width="800" height="800" loading="lazy" decoding="async"></picture>
-                <span class="cw-ring" aria-hidden="true"></span>
-            </div>
-            <blockquote class="cw-quote">
-                <p id="cw-quote-text">Every dollar saved on shipping is a dollar a business can invest in its people, its product, or its customers. That's why I started this.</p>
-                <footer><span>Why I started Smart LGSTX</span>Chris Tweedy, Founder &amp; CEO</footer>
-            </blockquote>
-        </div>
-    </section>
-
     <!-- Meet Chris -->
     <section class="section section-gray">
         <div class="section-container">
